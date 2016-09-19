@@ -1,1 +1,6 @@
 D:\devclass\github\LemonadeStandProject\LemonadeStand\LemonadeStand\bin\Debug\LemonadeStand.exe.config
+D:\devclass\github\LemonadeStandProject\LemonadeStand\LemonadeStand\bin\Debug\LemonadeStand.exe
+D:\devclass\github\LemonadeStandProject\LemonadeStand\LemonadeStand\bin\Debug\LemonadeStand.pdb
+D:\devclass\github\LemonadeStandProject\LemonadeStand\LemonadeStand\obj\Debug\LemonadeStand.csprojResolveAssemblyReference.cache
+D:\devclass\github\LemonadeStandProject\LemonadeStand\LemonadeStand\obj\Debug\LemonadeStand.exe
+D:\devclass\github\LemonadeStandProject\LemonadeStand\LemonadeStand\obj\Debug\LemonadeStand.pdb

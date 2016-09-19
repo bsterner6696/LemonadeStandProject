@@ -38,7 +38,24 @@ namespace LemonadeStand
             return numberValue;
         }
 
+        public void DisplayInventory(int number, string itemName)
+        {
+            Console.WriteLine("You have {0} {1}.", number, itemName);
+        }
 
+        public void PromptToBuy(string itemName)
+        {
+            Console.WriteLine("How many {0} would you like to buy?", itemName);
+        }
+
+        public void DisplayPricePer(double price)
+        {
+            Console.WriteLine("They cost ${0} each.", price);
+        }
         
+        public void DisplayMoney(double money)
+        {
+            Console.WriteLine("You have ${0}", money);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace LemonadeStand
 {
     public class Game
     {
-        HumanPlayer player1;
+        HumanPlayer player1 = new HumanPlayer();
         Day[] days = new Day[7];
         Forecast forecast = new Forecast();
         UserInterface userInterface = new UserInterface();
@@ -19,10 +19,11 @@ namespace LemonadeStand
             dayCount = 1;
         }
 
-        public void PlayGame()
+        public void Initialize()
         {
             GenerateWeather();
             GenerateCustomersForWeek();
+            RunThroughDay();
 
         }
 
@@ -95,5 +96,72 @@ namespace LemonadeStand
                 }
             }
         }
+
+
+        public void BuyCups()
+        {
+            userInterface.DisplayInventory(player1.stand.inventory.numberCups, "cups");
+            userInterface.PromptToBuy("cups");
+            userInterface.DisplayPricePer(player1.store.priceCups);
+            DisplayMoney();
+            player1.BuyCups(userInterface.GetNumberValue());
+        }
+
+        public void BuyIce()
+        {
+            userInterface.DisplayInventory(player1.stand.inventory.cubesIce, "ice cubes");
+            userInterface.PromptToBuy("ice cubes");
+            userInterface.DisplayPricePer(player1.store.priceIce);
+            DisplayMoney();
+            player1.BuyIce(userInterface.GetNumberValue());
+        }
+
+        public void BuyLemons()
+        {
+            userInterface.DisplayInventory(player1.stand.inventory.numberLemons, "lemons");
+            userInterface.PromptToBuy("lemons");
+            userInterface.DisplayPricePer(player1.store.priceLemons);
+            DisplayMoney();
+            player1.BuyLemons(userInterface.GetNumberValue());
+        }
+        public void BuySugar()
+        {
+            userInterface.DisplayInventory(player1.stand.inventory.cupsSugar, "cups of sugar");
+            userInterface.PromptToBuy("cups of sugar");
+            userInterface.DisplayPricePer(player1.store.priceSugar);
+            DisplayMoney();
+            player1.BuySugar(userInterface.GetNumberValue());
+        }
+
+        public void DisplayMoney()
+        {
+            userInterface.DisplayMoney(player1.stand.inventory.money);
+        }
+
+        public void BuyIngredients()
+        {
+            BuyCups();
+            BuyIce();
+            BuyLemons();
+            BuySugar();
+        }
+
+        public void AdvanceDay()
+        {
+            dayCount += 1;
+        }
+
+        public void RunThroughDay()
+        {
+            while (dayCount <= 7)
+            {
+                BuyIngredients();
+                RunStandForDay();
+                DisplayMoney();
+                Console.ReadLine();
+                AdvanceDay();
+            }
+        }
+
     }
 }
