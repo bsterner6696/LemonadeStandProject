@@ -10,6 +10,7 @@ namespace LemonadeStand
     {
         Inventory inventory;
         Store store;
+        Stand stand;
         string name;
 
 
@@ -18,6 +19,44 @@ namespace LemonadeStand
             ///set user name
             name = Console.ReadLine();
         }
-         
+
+        public void BuyIce(int amount)
+        {
+            inventory.money -= (amount * store.priceIce);
+            inventory.cubesIce += amount;
+            for (int x = 0; x < amount; x++)
+            {
+                inventory.iceCubes.Add(new Ice());
+            }
+        }
+        public void BuyLemons(int amount)
+        {
+            inventory.money -= (amount * store.priceLemons);
+            inventory.numberLemons += amount;
+            for (int x = 0; x < amount; x++)
+            {
+                inventory.lemons.Add(new Lemon());
+            }
+        }
+
+        public void BuySugar(int amount)
+        {
+            inventory.money -= (amount * store.priceSugar);
+            inventory.cupsSugar += amount;
+            for (int x = 0; x < amount; x++)
+            {
+                inventory.sugarCups.Add(new Sugar());
+            }
+        }
+
+        public void BuyCups(int amount)
+        {
+            inventory.money -= (amount * store.priceCups);
+            inventory.numberCups += amount;
+            for (int x = 0; x < amount; x++)
+            {
+                inventory.cups.Add(new Cup());
+            }
+        }
     }
 }

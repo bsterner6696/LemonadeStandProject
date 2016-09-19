@@ -39,19 +39,19 @@ namespace LemonadeStand
         }
         public int GetWeatherReliability()
         {
-            ///determines weatherType value based on forecast and random variable to see if it matches forecast.  Chance of this is arbitrary number
-            return random.Next(1, 11);
+            
+            return random.Next(1, 6);
             
         }
 
         public int GetTemperatureReliability()
         {
-            return random.Next(1, 11);
+            return random.Next(1, 6);
         }
 
         public int GetWeatherType(int type)
         {
-            if (weatherReliability != 10)
+            if (weatherReliability != 5)
             {
                 return type;
             } else
@@ -63,7 +63,7 @@ namespace LemonadeStand
 
         public int GetTemperature(int temp)
         {
-            if (temperatureReliability != 10)
+            if (temperatureReliability != 5)
             {
                 return temp;
             } else

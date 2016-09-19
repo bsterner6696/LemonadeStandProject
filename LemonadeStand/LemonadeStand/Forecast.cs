@@ -14,8 +14,7 @@ namespace LemonadeStand
         
         public void SetForecastWeather()
         {
-            ///randomly determines forecast for a given day.  The forecast for the entire game is determined at bootup, but only the next 7 days can be seen.  Each type of weather corresponds to a matching number value.
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 35; i++)
             {
                 forecastWeather[i] = random.Next(0, 4);
             }
@@ -23,7 +22,7 @@ namespace LemonadeStand
 
         public void SetForecastTemperature()
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 35; i++)
             {
                 forecastTemperature[i] = random.Next(60, 101);
             }

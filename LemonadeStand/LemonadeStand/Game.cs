@@ -8,13 +8,12 @@ namespace LemonadeStand
 {
     public class Game
     {
-        Player player;
+        HumanPlayer player1;
         Day[] days = new Day[7];
         Forecast forecast = new Forecast();
 
         public void PlayGame()
         {
-            ///go through order of game, just call functions for the most part
             GenerateWeather();
 
         }
@@ -62,5 +61,6 @@ namespace LemonadeStand
             SetWeatherForWeek();
             SetTemperatureForWeek();
         }
+
     }
 }

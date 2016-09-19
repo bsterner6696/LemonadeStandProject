@@ -8,33 +8,18 @@ namespace LemonadeStand
 {
     public class Inventory
     {
-        int numberCups;
-        int numberLemons;
-        int cupsSugar;
-        int cubesIce;
-        int CupsOfLemonadeLeftInPitcher;
-        double money;
-        List<Lemon> lemons;
-        List<Cup> cups;
-        List<Sugar> sugarCups;
-        List<Ice> iceCubes;
+        public int numberCups;
+        public int numberLemons;
+        public int cupsSugar;
+        public int cubesIce;
+        public int CupsOfLemonadeLeftInPitcher;
+        public double money;
+        public List<Lemon> lemons;
+        public List<Cup> cups;
+        public List<Sugar> sugarCups;
+        public List<Ice> iceCubes;
 
-        public void MakeLemonade()
-        {
-            numberLemons -= 4;
-            cupsSugar -= 4;
-            cubesIce -= 20;
-            CupsOfLemonadeLeftInPitcher = 10;
-            for (int x = 0; x < 4; x++)
-            {
-                lemons.RemoveAt(0);
-                sugarCups.RemoveAt(0);
-                for (int y = 0; y < 5; y++)
-                {
-                    iceCubes.RemoveAt(0);
-                }
-            }
-        }
+        
 
     }
 }
