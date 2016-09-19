@@ -10,7 +10,7 @@ namespace LemonadeStand
     {
         Player player;
         Day day;
-
+        Forecast forecast = new Forecast();
 
         public void PlayGame()
         {

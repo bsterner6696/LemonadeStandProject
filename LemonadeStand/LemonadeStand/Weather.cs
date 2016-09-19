@@ -10,7 +10,8 @@ namespace LemonadeStand
     {
         public int weatherType;
         public int temperature;
-        Forecast forecast = new Forecast();
+        public int weatherReliability;
+        public int temperatureReliability;
         Random random = new Random();
 
 
@@ -30,18 +31,45 @@ namespace LemonadeStand
                     
                 case 3:
                     return "Hazy";
-                    
-                case 4:
-                    return "Overcast";
-                    
+                      
                 default:
                     return "Sunny and Clear";
                     
             }
         }
-        public void SetWeather()
+        public int GetWeatherReliability()
         {
             ///determines weatherType value based on forecast and random variable to see if it matches forecast.  Chance of this is arbitrary number
+            return random.Next(1, 11);
+            
+        }
+
+        public int GetTemperatureReliability()
+        {
+            return random.Next(1, 11);
+        }
+
+        public int GetWeatherType(int type)
+        {
+            if (weatherReliability != 10)
+            {
+                return type;
+            } else
+            {
+                return random.Next(0, 4);
+            }
+
+        }
+
+        public int GetTemperature(int temp)
+        {
+            if (temperatureReliability != 10)
+            {
+                return temp;
+            } else
+            {
+                return random.Next(60, 101);
+            }
         }
     }
 }
