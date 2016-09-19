@@ -8,5 +8,6 @@ namespace LemonadeStand
 {
     public class Day
     {
+        public int dayNumber;
     }
 }

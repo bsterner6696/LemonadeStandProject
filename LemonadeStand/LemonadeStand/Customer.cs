@@ -8,5 +8,9 @@ namespace LemonadeStand
 {
     public class Customer
     {
+        public int basePriceWillingToPay;
+        public int weatherModifier;
+        public int temperatureModifier;
+        public int actualPriceWillingToPay;
     }
 }

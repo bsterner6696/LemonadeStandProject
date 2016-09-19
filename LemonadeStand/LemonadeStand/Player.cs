@@ -9,8 +9,18 @@ namespace LemonadeStand
     abstract public class Player
     {
         Inventory inventory;
-        Double money;
+        double money;
         string name;
+
+        public string GetName()
+        {
+            ///prompt for user name
+        }
+
+        public void SetName(string name)
+        {
+            ///set user name
+        }
          
     }
 }
