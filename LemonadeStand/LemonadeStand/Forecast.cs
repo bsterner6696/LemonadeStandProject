@@ -8,8 +8,8 @@ namespace LemonadeStand
 {
     public class Forecast
     {
-        int[] forecastWeather;
-        int[] forecastTemperature;
+        int[] forecastWeather = new int[7];
+        int[] forecastTemperature = new int[7];
         Random random = new Random();
         
         public void SetForecastWeather()

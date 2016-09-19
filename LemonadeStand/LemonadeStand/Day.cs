@@ -9,16 +9,64 @@ namespace LemonadeStand
     public class Day
     {
         public int dayNumber;
-        List<Customer> customer;
-        Weather weather = new Weather();
+        public List<Customer> customers;
+        public Weather weather = new Weather();
         Random random = new Random();
+        public int numberOfCustomers;
         
-        public int GetNumberOfCustomers()
+        public void GetNumberOfCustomers()
         {
-            return random.Next(70, 121);
+            numberOfCustomers = random.Next(70, 121);
         }
 
+        public void PopulateCustomers()
+        {
+            for (int x = 0; x < numberOfCustomers; x++)
+            {
+                customers[x] = new Customer();
+            }
+        }
 
+        public void SetCustomerBasePrice()
+        {
+            for (int x = 0; x < numberOfCustomers; x++)
+            {
+                customers[x].SetBasePrice();
+            }
+        }
+       
+        public void SetCustomerWeatherModifiers()
+        {
+            for (int x = 0; x < numberOfCustomers; x++)
+            {
+                customers[x].SetWeatherModifier(weather.weatherType);
+            }
+        }
+        public void SetCustomerTemeratureModifiers()
+        {
+            for (int x = 0; x < numberOfCustomers; x++)
+            {
+                customers[x].SetTemperatureModifier(weather.temperature);
+            }
+        }
+
+        public void SetCustomerActualPrice()
+        {
+            for (int x = 0; x < numberOfCustomers; x++)
+            {
+                customers[x].SetActualPrice();
+            }
+        }
+
+        public void GenerateCustomers()
+        {
+            GetNumberOfCustomers();
+            PopulateCustomers();
+            SetCustomerBasePrice();
+            SetCustomerWeatherModifiers();
+            SetCustomerTemeratureModifiers();
+            SetCustomerActualPrice();
+        }
 
     }
 }
