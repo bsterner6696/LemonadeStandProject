@@ -11,10 +11,18 @@ namespace LemonadeStand
         HumanPlayer player1;
         Day[] days = new Day[7];
         Forecast forecast = new Forecast();
+        UserInterface userInterface = new UserInterface();
+        int dayCount;
+
+        public Game()
+        {
+            dayCount = 1;
+        }
 
         public void PlayGame()
         {
             GenerateWeather();
+            GenerateCustomersForWeek();
 
         }
 
@@ -61,6 +69,31 @@ namespace LemonadeStand
             SetWeatherForWeek();
             SetTemperatureForWeek();
         }
-
+        public void GenerateCustomersForWeek()
+        {
+            for (int x = 0; x < 7; x++)
+            {
+                days[x].GenerateCustomers();
+            }
+        }
+        
+        public void RunStandForDay()
+        {
+            foreach (Customer customer in days[dayCount].customers)
+            {
+                if (customer.actualPriceWillingToPay >= player1.stand.priceLemonade && player1.stand.inventory.numberCups > 0)
+                {
+                        if (player1.stand.inventory.cupsOfLemonadeLeftInPitcher > 0)
+                        {
+                            player1.stand.SellLemonade();
+                        }
+                        else if (player1.stand.inventory.cupsSugar > 3 && player1.stand.inventory.numberLemons > 3 && player1.stand.inventory.cubesIce > 19)
+                        {
+                            player1.stand.MakeLemonade();
+                            player1.stand.SellLemonade();
+                        }
+                }
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace LemonadeStand
         public int numberLemons;
         public int cupsSugar;
         public int cubesIce;
-        public int CupsOfLemonadeLeftInPitcher;
+        public int cupsOfLemonadeLeftInPitcher;
         public double money;
         public List<Lemon> lemons;
         public List<Cup> cups;

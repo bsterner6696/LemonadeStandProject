@@ -8,12 +8,14 @@ namespace LemonadeStand
 {
     public class Stand
     {
-        Inventory inventory;
+        public Inventory inventory;
+        public int priceLemonade;
 
-        public void SellLemonade(double price)
+        public void SellLemonade()
         {
-            inventory.CupsOfLemonadeLeftInPitcher -= 1;
-            inventory.money += price;
+            inventory.cupsOfLemonadeLeftInPitcher -= 1;
+            double aPenny = .01;
+            inventory.money += priceLemonade * aPenny;
         }
 
         public void MakeLemonade()
@@ -21,7 +23,7 @@ namespace LemonadeStand
             inventory.numberLemons -= 4;
             inventory.cupsSugar -= 4;
             inventory.cubesIce -= 20;
-            inventory.CupsOfLemonadeLeftInPitcher = 10;
+            inventory.cupsOfLemonadeLeftInPitcher = 10;
             for (int x = 0; x < 4; x++)
             {
                 inventory.lemons.RemoveAt(0);
