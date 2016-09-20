@@ -27,8 +27,6 @@ namespace LemonadeStand
         public List<Cup> cups = new List<Cup>();
         public List<Sugar> sugarCups = new List<Sugar>();
         public List<Ice> iceCubes = new List<Ice>();
-        
-        
-
+                
     }
 }

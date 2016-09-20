@@ -15,6 +15,7 @@ namespace LemonadeStand
         public int maxTemperature = 100;
         public int minTemperature = 60;
         static Random random = new Random();
+        public Forecast forecast = new Forecast();
 
 
         public string GetWeather()
@@ -38,6 +39,15 @@ namespace LemonadeStand
                     return "Sunny and Clear";
                     
             }
+        }
+
+        public void SetWeatherType()
+        {
+            weatherType = random.Next(0, 4);
+        }
+        public void SetTemperature()
+        {
+            temperature = random.Next(60, 101);
         }
         public int GetWeatherReliability()
         {

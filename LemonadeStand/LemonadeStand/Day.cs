@@ -74,6 +74,11 @@ namespace LemonadeStand
             SetCustomerActualPrice();
         }
 
+        public void GoThroughDay(Action tasksForDay)
+        {
+            tasksForDay();
+        }
+
 
     }
 }

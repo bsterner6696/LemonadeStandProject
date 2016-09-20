@@ -8,37 +8,36 @@ namespace LemonadeStand
 {
     public class Forecast
     {
-        public int[] forecastWeather = new int[35];
-        public int[] forecastTemperature = new int[35];
+        public int forecastWeather;
+        public int forecastTemperature;
         static Random random = new Random();
         
-        public void SetForecastWeather()
+        public void SetForecastWeather(int type)
         {
-            for (int i = 0; i < 35; i++)
+            if (GetForecastReliability() != 5)
             {
-                forecastWeather[i] = random.Next(0, 4);
+                forecastWeather = type;
+            } else
+            {
+                forecastWeather = random.Next(0, 4);
             }
         }
 
-        public void PopulateForecast()
+        public void SetForecastTemperature(int temperature)
         {
-            for (int x = 0; x < 35; x++)
+            if (GetForecastReliability() != 5)
             {
-                forecastWeather[x] = 0;
-                forecastTemperature[x] = 60;
+                forecastTemperature = temperature;
+            } else
+            {
+                forecastTemperature = random.Next(60, 101);
             }
         }
 
-        public void SetForecastTemperature()
+        public int GetForecastReliability()
         {
-            for (int i = 0; i < 35; i++)
-            {
-                forecastTemperature[i] = random.Next(60, 101);
-            }
+            return random.Next(0, 6);
         }
-        public void DeclareForecast()
-        {
-            ///a method for checking the forecast for the next 7 days, probably uses WriteLine or something similar.
-        }
+
     }
 }

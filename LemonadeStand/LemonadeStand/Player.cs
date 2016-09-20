@@ -9,7 +9,6 @@ namespace LemonadeStand
     abstract public class Player
     {
 
-        public Store store = new Store();
         public Stand stand = new Stand();
         public string name;
 
@@ -18,18 +17,18 @@ namespace LemonadeStand
             name = Console.ReadLine();
         }
 
-        public void BuyIce(int amount)
+        public void BuyIce(int amount, double price)
         {
-            stand.inventory.money -= (amount * store.priceIce);
+            stand.inventory.money -= (amount * price);
             stand.inventory.cubesIce += amount;
             for (int x = 0; x < amount; x++)
             {
                 stand.inventory.iceCubes.Add(new Ice());
             }
         }
-        public void BuyLemons(int amount)
+        public void BuyLemons(int amount, double price)
         {
-            stand.inventory.money -= (amount * store.priceLemons);
+            stand.inventory.money -= (amount * price);
             stand.inventory.numberLemons += amount;
             for (int x = 0; x < amount; x++)
             {
@@ -37,9 +36,9 @@ namespace LemonadeStand
             }
         }
 
-        public void BuySugar(int amount)
+        public void BuySugar(int amount, double price)
         {
-            stand.inventory.money -= (amount * store.priceSugar);
+            stand.inventory.money -= (amount * price);
             stand.inventory.cupsSugar += amount;
             for (int x = 0; x < amount; x++)
             {
@@ -47,9 +46,9 @@ namespace LemonadeStand
             }
         }
 
-        public void BuyCups(int amount)
+        public void BuyCups(int amount, double price)
         {
-            stand.inventory.money -= (amount * store.priceCups);
+            stand.inventory.money -= (amount * price);
             stand.inventory.numberCups += amount;
             for (int x = 0; x < amount; x++)
             {

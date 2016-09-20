@@ -9,9 +9,10 @@ namespace LemonadeStand
     public class Game
     {
         HumanPlayer player1 = new HumanPlayer();
-        Day[] days = new Day[7];
+        Day[] days = new Day[35];
         Forecast forecast = new Forecast();
         UserInterface userInterface = new UserInterface();
+        Store store = new Store();
         int dayCount;
         int cupsBefore;
 
@@ -22,7 +23,7 @@ namespace LemonadeStand
 
         public void GenerateDays()
         {
-            for (int x = 0; x < 7; x++)
+            for (int x = 0; x < 35; x++)
             {
                 days[x] = new Day();
             }
@@ -33,54 +34,48 @@ namespace LemonadeStand
             GenerateDays();
             GenerateWeather();
             GenerateCustomersForWeek();
-            RunThroughDay();
+            LoopThroughDays();
 
         }
 
-        public void GenerateForecast()
-        {
 
-            forecast.SetForecastWeather();
-            forecast.SetForecastTemperature();
-        }
-        public void SetWeatherReliabilityForWeek()
-        {
-            for (int x = 0; x < 7; x++)
-            {
-                days[x].weather.weatherReliability = days[x].weather.GetWeatherReliability();
-            }
-        }
-        public void SetTemperatureReliabilityForWeek()
-        {
-            for (int x = 0; x < 7; x++)
-            {
-                days[x].weather.temperatureReliability = days[x].weather.GetTemperatureReliability();
-            }
-        }
         public void SetWeatherForWeek()
         {
             for (int x = 0; x < 7; x++)
             {
-                days[x].weather.weatherType = days[x].weather.GetWeatherType(forecast.forecastWeather[x]);
+                days[x].weather.SetWeatherType();
             }
         }
 
+        public void SetWeatherForecastForWeek()
+        {
+            for (int x = 0; x < 7; x++)
+            {
+                days[x].weather.forecast.SetForecastWeather(days[x].weather.weatherType);
+            }
+        }
+
+        public void SetTemperatureForecastForWeek()
+        {
+            for (int x = 0; x < 7; x++)
+            {
+                days[x].weather.forecast.SetForecastTemperature(days[x].weather.temperature);
+            }
+        }
         public void SetTemperatureForWeek()
         {
             for (int x = 0; x < 7; x++)
             {
-                days[x].weather.temperature = days[x].weather.GetTemperature(forecast.forecastTemperature[x]);
+               days[x].weather.SetTemperature();
             }
         }
 
         public void GenerateWeather()
         {
-            forecast.PopulateForecast();
-            GenerateForecast();
-            SetWeatherReliabilityForWeek();
-            SetTemperatureReliabilityForWeek();
             SetWeatherForWeek();
             SetTemperatureForWeek();
+            SetWeatherForecastForWeek();
+            SetTemperatureForecastForWeek();
         }
         public void GenerateCustomersForWeek()
         {
@@ -114,7 +109,7 @@ namespace LemonadeStand
         {
             userInterface.DisplayInventory(player1.stand.inventory.numberCups, "cups");
             userInterface.PromptToBuy("cups");
-            userInterface.DisplayPricePer(player1.store.priceCups);
+            userInterface.DisplayPricePer(store.priceCups);
             DisplayMoney();
             BuyCups();
             
@@ -123,10 +118,10 @@ namespace LemonadeStand
         public void BuyCups()
         {
             int amount = userInterface.GetNumberValue();
-            if (amount * player1.store.priceCups <= player1.stand.inventory.money)
+            if (amount * store.priceCups <= player1.stand.inventory.money)
             {
 
-                player1.BuyCups(amount);
+                player1.BuyCups(amount, store.priceCups);
             } else
             {
                 BuyCups();
@@ -138,7 +133,7 @@ namespace LemonadeStand
         {
             userInterface.DisplayInventory(player1.stand.inventory.cubesIce, "ice cubes");
             userInterface.PromptToBuy("ice cubes");
-            userInterface.DisplayPricePer(player1.store.priceIce);
+            userInterface.DisplayPricePer(store.priceIce);
             DisplayMoney();
             BuyIce();
             
@@ -147,10 +142,10 @@ namespace LemonadeStand
         public void BuyIce()
         {
             int amount = userInterface.GetNumberValue();
-            if (amount * player1.store.priceIce <= player1.stand.inventory.money)
+            if (amount * store.priceIce <= player1.stand.inventory.money)
             {
 
-                player1.BuyIce(amount);
+                player1.BuyIce(amount, store.priceIce);
             } else
             {
                 BuyIce();
@@ -161,7 +156,7 @@ namespace LemonadeStand
         {
             userInterface.DisplayInventory(player1.stand.inventory.numberLemons, "lemons");
             userInterface.PromptToBuy("lemons");
-            userInterface.DisplayPricePer(player1.store.priceLemons);
+            userInterface.DisplayPricePer(store.priceLemons);
             DisplayMoney();
             BuyLemons();
         }
@@ -169,10 +164,10 @@ namespace LemonadeStand
         public void BuyLemons()
         {
             int amount = userInterface.GetNumberValue();
-            if (amount * player1.store.priceLemons <= player1.stand.inventory.money)
+            if (amount * store.priceLemons <= player1.stand.inventory.money)
             {
 
-                player1.BuyLemons(amount);
+                player1.BuyLemons(amount, store.priceLemons);
             } else
             {
                 BuyLemons();
@@ -182,7 +177,7 @@ namespace LemonadeStand
         {
             userInterface.DisplayInventory(player1.stand.inventory.cupsSugar, "cups of sugar");
             userInterface.PromptToBuy("cups of sugar");
-            userInterface.DisplayPricePer(player1.store.priceSugar);
+            userInterface.DisplayPricePer(store.priceSugar);
             DisplayMoney();
             BuySugar();
         }
@@ -190,10 +185,10 @@ namespace LemonadeStand
         public void BuySugar()
         {
             int amount = userInterface.GetNumberValue();
-            if (amount * player1.store.priceSugar <= player1.stand.inventory.money)
+            if (amount * store.priceSugar <= player1.stand.inventory.money)
             {
 
-                player1.BuySugar(amount);
+                player1.BuySugar(amount, store.priceSugar);
             } else
             {
                 BuySugar();
@@ -222,29 +217,34 @@ namespace LemonadeStand
             dayCount += 1;
         }
 
-        public void RunThroughDay()
+        public void LoopThroughDays()
         {
             while (dayCount < 7)
             {
-                DisplayForecast();
-                Console.ReadLine();
-                Console.Clear();
-                DisplayMoney();
-                userInterface.DisplayWeather(days[dayCount].weather.GetWeather(), days[dayCount].weather.temperature);
-                SetPriceForLemonade();
-                Console.Clear();
-                BuyIngredients();
-                StoreNumberCups();                
-                RunStandForDay();
-                userInterface.AnnounceEndOfDay(dayCount+1);
-                DisplayCupsSold();
-                DisplayMoney();
-                AdvanceDay();
-                ResetInventory();
-                userInterface.DisplayIceMelted();                
-                Console.ReadLine();
-                Console.Clear();
+                days[dayCount].GoThroughDay(RunThroughDay);
             }
+        }
+
+        public void RunThroughDay()
+        {
+            DisplayForecast(); 
+            Console.ReadLine();
+            Console.Clear();
+            DisplayMoney(); 
+            userInterface.DisplayWeather(days[dayCount].weather.GetWeather(), days[dayCount].weather.temperature); 
+            SetPriceForLemonade();
+            Console.Clear();
+            BuyIngredients(); 
+            StoreNumberCups();             
+            RunStandForDay();
+            userInterface.AnnounceEndOfDay(dayCount + 1);
+            DisplayCupsSold();
+            DisplayMoney();
+            AdvanceDay(); 
+            ResetInventory();
+            userInterface.DisplayIceMelted();   
+            Console.ReadLine();
+            Console.Clear();
         }
 
         public void SetPriceForLemonade()
@@ -258,7 +258,7 @@ namespace LemonadeStand
             userInterface.AnnounceForecast();
             for (int x = dayCount; x < dayCount + 7; x++)
             {
-                userInterface.DisplayForecast(forecast.forecastWeather[x + 1], forecast.forecastTemperature[x + 1], x + 2);
+                userInterface.DisplayForecast(days[x + 1].weather.forecast.forecastWeather, days[x + 1].weather.forecast.forecastTemperature, x + 2);
             }
 
         }
