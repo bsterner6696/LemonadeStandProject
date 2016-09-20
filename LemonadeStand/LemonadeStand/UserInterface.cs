@@ -110,5 +110,16 @@ namespace LemonadeStand
         {
             Console.WriteLine("Your ice has melted!");
         }
+
+        public void DisplayWelcomeMessage()
+        {
+            Console.WriteLine("Welcome to Lemonade Stand!");
+            Console.WriteLine("In this game you will buy ingredients to make lemonade, and run a stand to sell it.");
+            Console.WriteLine("The weather on a particular day will determine how much a customer will pay for lemonade.");
+            Console.WriteLine("Even in the best case scenario, a customer will never pay more than 40 cents for a cup.");
+            Console.WriteLine("A pitcher holds 10 cups of lemonade.");
+            Console.WriteLine("A pitcher of lemonade requires 4 lemons, 4 cups of sugar, and 20 ice cubes to make.");
+            Console.WriteLine("Good luck!");
+        }
     }
 }

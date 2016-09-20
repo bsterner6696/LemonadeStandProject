@@ -10,8 +10,6 @@ namespace LemonadeStand
     {
         public int weatherType;
         public int temperature;
-        public int weatherReliability;
-        public int temperatureReliability;
         public int maxTemperature = 100;
         public int minTemperature = 60;
         static Random random = new Random();
@@ -20,7 +18,7 @@ namespace LemonadeStand
 
         public string GetWeather()
         {
-            ///this will take the weatherType value and return the corresponding string
+            
             switch (weatherType)
             {
                 case 0:
@@ -47,41 +45,8 @@ namespace LemonadeStand
         }
         public void SetTemperature()
         {
-            temperature = random.Next(60, 101);
+            temperature = random.Next(minTemperature, maxTemperature);
         }
-        public int GetWeatherReliability()
-        {
-            
-            return random.Next(1, 6);
-            
-        }
-
-        public int GetTemperatureReliability()
-        {
-            return random.Next(1, 6);
-        }
-
-        public int GetWeatherType(int type)
-        {
-            if (weatherReliability != 5)
-            {
-                return type;
-            } else
-            {
-                return random.Next(0, 4);
-            }
-
-        }
-
-        public int GetTemperature(int temp)
-        {
-            if (temperatureReliability != 5)
-            {
-                return temp;
-            } else
-            {
-                return random.Next(minTemperature, maxTemperature);
-            }
-        }
+        
     }
 }

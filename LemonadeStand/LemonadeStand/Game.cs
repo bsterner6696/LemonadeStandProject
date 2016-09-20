@@ -34,6 +34,9 @@ namespace LemonadeStand
             GenerateDays();
             GenerateWeather();
             GenerateCustomersForWeek();
+            userInterface.DisplayWelcomeMessage();
+            Console.ReadLine();
+            Console.Clear();
             LoopThroughDays();
 
         }
