@@ -15,9 +15,40 @@ namespace LemonadeStand
             Console.WriteLine("Please enter name for {0}.", name);
         }
 
-        public void DisplayForecast()
+        
+        public void DisplayForecast(int type, int temperature, int dayNumber)
         {
+            string weatherType;
+            switch (type)
+            {
+                case 0:
+                    weatherType = "Sunny and Clear";
+                    break;
 
+                case 1:
+                    weatherType = "Rainy";
+                    break;
+
+                case 2:
+                    weatherType = "Cloudy";
+                    break;
+
+                case 3:
+                    weatherType = "Hazy";
+                    break;
+
+                default:
+                    weatherType = "Sunny and Clear";
+                    break;
+
+            }
+
+            Console.WriteLine("The weather for day number {0} will be {1} and {2} degrees.", dayNumber, weatherType, temperature);
+        }
+
+        public void AnnounceForecast()
+        {
+            Console.WriteLine("Now it is time for the forecast for the next seven days.");
         }
         public void SetNumberValue()
         {
@@ -64,6 +95,11 @@ namespace LemonadeStand
         public void RequestLemonadePrice()
         {
             Console.WriteLine("How many cents would you like to charge for a glass of lemonade?");
+        }
+
+        public void AnnounceEndOfDay(int dayNumber)
+        {
+            Console.WriteLine("Completed day number {0}!", dayNumber);
         }
     }
 }

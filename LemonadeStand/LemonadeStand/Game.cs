@@ -207,9 +207,13 @@ namespace LemonadeStand
         public void BuyIngredients()
         {
             ShopForCups();
+            Console.Clear();
             ShopForIce();
+            Console.Clear();
             ShopForLemons();
+            Console.Clear();
             ShopForSugar();
+            Console.Clear();
         }
 
         public void AdvanceDay()
@@ -221,14 +225,21 @@ namespace LemonadeStand
         {
             while (dayCount < 7)
             {
-                BuyIngredients();
-                
+                DisplayForecast();
+                Console.ReadLine();
+                Console.Clear();
                 DisplayMoney();
                 userInterface.DisplayWeather(days[dayCount].weather.GetWeather(), days[dayCount].weather.temperature);
                 SetPriceForLemonade();
-                RunStandForDay();
-                AdvanceDay();
+                Console.Clear();
+                BuyIngredients();                
                 DisplayMoney();
+                userInterface.DisplayInventory(player1.stand.inventory.numberCups, "cups");
+                RunStandForDay();
+                userInterface.AnnounceEndOfDay(dayCount+1);
+                DisplayMoney();
+                userInterface.DisplayInventory(player1.stand.inventory.numberCups, "cups");
+                AdvanceDay();                
                 Console.ReadLine();
             }
         }
@@ -239,6 +250,14 @@ namespace LemonadeStand
             player1.stand.priceLemonade = userInterface.GetNumberValue();
         }
 
+        public void DisplayForecast()
+        {
+            userInterface.AnnounceForecast();
+            for (int x = dayCount; x < dayCount + 7; x++)
+            {
+                userInterface.DisplayForecast(forecast.forecastWeather[x + 1], forecast.forecastTemperature[x + 1], x + 2);
+            }
 
+        }
     }
 }

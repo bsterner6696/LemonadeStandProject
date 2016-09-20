@@ -26,7 +26,7 @@ namespace LemonadeStand
                     return "Sunny and Clear";
                     
                 case 1:
-                    return "Rain";
+                    return "Rainy";
                     
                 case 2:
                     return "Cloudy";
