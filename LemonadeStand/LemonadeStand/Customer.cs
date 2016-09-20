@@ -8,24 +8,28 @@ namespace LemonadeStand
 {
     public class Customer
     {
-        public int basePriceWillingToPay;
+        public int basePriceWillingToPay = 20;
+        public int moodModifier;
+        public int moodModifierMax = 21;
+        public int moodModifierMin = 0;
         public int weatherModifier;
         public int temperatureModifier;
         public int actualPriceWillingToPay;
-        Random random = new Random();
+        static Random random = new Random();
         public Customer()
         {
 
         }
 
-        public void SetBasePrice()
+        
+        public void SetMoodModifier()
         {
-            basePriceWillingToPay = 20 + random.Next(0, 21);
+            moodModifier = random.Next(moodModifierMin, moodModifierMax);
         }
 
         public void SetActualPrice()
         {
-            actualPriceWillingToPay = basePriceWillingToPay - weatherModifier - temperatureModifier;
+            actualPriceWillingToPay = basePriceWillingToPay + moodModifier - weatherModifier - temperatureModifier;
         }
 
         public void SetWeatherModifier(int weather)

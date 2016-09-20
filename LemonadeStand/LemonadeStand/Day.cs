@@ -11,8 +11,10 @@ namespace LemonadeStand
         public int dayNumber;
         public List<Customer> customers = new List<Customer>();
         public Weather weather = new Weather();
-        Random random = new Random();
+        static Random random = new Random();
         public int numberOfCustomers;
+        public int maxNumberOfCustomers = 120;
+        public int minNumberOfCustomers = 70;
         public Day()
         {
             numberOfCustomers = 70;
@@ -20,7 +22,7 @@ namespace LemonadeStand
         
         public void GetNumberOfCustomers()
         {
-            numberOfCustomers = random.Next(70, 121);
+            numberOfCustomers = random.Next(minNumberOfCustomers, maxNumberOfCustomers);
         }
 
         public void PopulateCustomers()
@@ -31,11 +33,11 @@ namespace LemonadeStand
             }
         }
 
-        public void SetCustomerBasePrice()
+        public void SetCustomerMood()
         {
             for (int x = 0; x < numberOfCustomers; x++)
             {
-                customers[x].SetBasePrice();
+                customers[x].SetMoodModifier();
             }
         }
         
@@ -66,11 +68,12 @@ namespace LemonadeStand
         {
             GetNumberOfCustomers();
             PopulateCustomers();
-            SetCustomerBasePrice();
+            SetCustomerMood();
             SetCustomerWeatherModifiers();
             SetCustomerTemeratureModifiers();
             SetCustomerActualPrice();
         }
+
 
     }
 }

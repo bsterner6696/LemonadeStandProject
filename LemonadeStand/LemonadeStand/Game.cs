@@ -38,6 +38,7 @@ namespace LemonadeStand
 
         public void GenerateForecast()
         {
+
             forecast.SetForecastWeather();
             forecast.SetForecastTemperature();
         }
@@ -98,7 +99,7 @@ namespace LemonadeStand
                         {
                             player1.stand.SellLemonade();
                         }
-                        else if (player1.stand.inventory.cupsSugar > 3 && player1.stand.inventory.numberLemons > 3 && player1.stand.inventory.cubesIce > 19)
+                        else if (player1.stand.inventory.cupsSugar >= player1.stand.recipe.requiredCupsOfSugar && player1.stand.inventory.numberLemons >= player1.stand.recipe.requiredLemons && player1.stand.inventory.cubesIce >= player1.stand.recipe.requiredIceCubes)
                         {
                             player1.stand.MakeLemonade();
                             player1.stand.SellLemonade();
@@ -108,39 +109,94 @@ namespace LemonadeStand
         }
 
 
-        public void BuyCups()
+        public void ShopForCups()
         {
             userInterface.DisplayInventory(player1.stand.inventory.numberCups, "cups");
             userInterface.PromptToBuy("cups");
             userInterface.DisplayPricePer(player1.store.priceCups);
             DisplayMoney();
-            player1.BuyCups(userInterface.GetNumberValue());
+            BuyCups();
+            
         }
 
-        public void BuyIce()
+        public void BuyCups()
+        {
+            int amount = userInterface.GetNumberValue();
+            if (amount * player1.store.priceCups <= player1.stand.inventory.money)
+            {
+
+                player1.BuyCups(amount);
+            } else
+            {
+                BuyCups();
+            }
+        }
+
+
+        public void ShopForIce()
         {
             userInterface.DisplayInventory(player1.stand.inventory.cubesIce, "ice cubes");
             userInterface.PromptToBuy("ice cubes");
             userInterface.DisplayPricePer(player1.store.priceIce);
             DisplayMoney();
-            player1.BuyIce(userInterface.GetNumberValue());
+            BuyIce();
+            
         }
 
-        public void BuyLemons()
+        public void BuyIce()
+        {
+            int amount = userInterface.GetNumberValue();
+            if (amount * player1.store.priceIce <= player1.stand.inventory.money)
+            {
+
+                player1.BuyIce(amount);
+            } else
+            {
+                BuyIce();
+            }
+        }
+
+        public void ShopForLemons()
         {
             userInterface.DisplayInventory(player1.stand.inventory.numberLemons, "lemons");
             userInterface.PromptToBuy("lemons");
             userInterface.DisplayPricePer(player1.store.priceLemons);
             DisplayMoney();
-            player1.BuyLemons(userInterface.GetNumberValue());
+            BuyLemons();
         }
-        public void BuySugar()
+
+        public void BuyLemons()
+        {
+            int amount = userInterface.GetNumberValue();
+            if (amount * player1.store.priceLemons <= player1.stand.inventory.money)
+            {
+
+                player1.BuyLemons(amount);
+            } else
+            {
+                BuyLemons();
+            }
+        }
+        public void ShopForSugar()
         {
             userInterface.DisplayInventory(player1.stand.inventory.cupsSugar, "cups of sugar");
             userInterface.PromptToBuy("cups of sugar");
             userInterface.DisplayPricePer(player1.store.priceSugar);
             DisplayMoney();
-            player1.BuySugar(userInterface.GetNumberValue());
+            BuySugar();
+        }
+
+        public void BuySugar()
+        {
+            int amount = userInterface.GetNumberValue();
+            if (amount * player1.store.priceSugar <= player1.stand.inventory.money)
+            {
+
+                player1.BuySugar(amount);
+            } else
+            {
+                BuySugar();
+            }
         }
 
         public void DisplayMoney()
@@ -150,10 +206,10 @@ namespace LemonadeStand
 
         public void BuyIngredients()
         {
-            BuyCups();
-            BuyIce();
-            BuyLemons();
-            BuySugar();
+            ShopForCups();
+            ShopForIce();
+            ShopForLemons();
+            ShopForSugar();
         }
 
         public void AdvanceDay()

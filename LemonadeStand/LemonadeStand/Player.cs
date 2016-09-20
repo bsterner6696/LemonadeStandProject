@@ -13,7 +13,6 @@ namespace LemonadeStand
         public Stand stand = new Stand();
         public string name;
 
-
         public void SetName(string name)
         {
             name = Console.ReadLine();

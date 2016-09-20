@@ -10,7 +10,7 @@ namespace LemonadeStand
     {
         public int[] forecastWeather = new int[35];
         public int[] forecastTemperature = new int[35];
-        Random random = new Random();
+        static Random random = new Random();
         
         public void SetForecastWeather()
         {

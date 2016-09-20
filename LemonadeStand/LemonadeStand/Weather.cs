@@ -12,7 +12,9 @@ namespace LemonadeStand
         public int temperature;
         public int weatherReliability;
         public int temperatureReliability;
-        Random random = new Random();
+        public int maxTemperature = 100;
+        public int minTemperature = 60;
+        static Random random = new Random();
 
 
         public string GetWeather()
@@ -68,7 +70,7 @@ namespace LemonadeStand
                 return temp;
             } else
             {
-                return random.Next(60, 101);
+                return random.Next(minTemperature, maxTemperature);
             }
         }
     }

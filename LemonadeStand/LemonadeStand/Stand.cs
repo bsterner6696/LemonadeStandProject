@@ -10,6 +10,7 @@ namespace LemonadeStand
     {
         public Inventory inventory = new Inventory();
         public int priceLemonade;
+        public Recipe recipe = new Recipe();
 
         public void SellLemonade()
         {
@@ -22,18 +23,21 @@ namespace LemonadeStand
 
         public void MakeLemonade()
         {
-            inventory.numberLemons -= 4;
-            inventory.cupsSugar -= 4;
-            inventory.cubesIce -= 20;
+            inventory.numberLemons -= recipe.requiredLemons;
+            inventory.cupsSugar -= recipe.requiredCupsOfSugar;
+            inventory.cubesIce -= recipe.requiredIceCubes;
             inventory.cupsOfLemonadeLeftInPitcher = 10;
-            for (int x = 0; x < 4; x++)
+            for (int x = 0; x < recipe.requiredLemons; x++)
             {
                 inventory.lemons.RemoveAt(0);
+            }
+            for (int x = 0; x < recipe.requiredCupsOfSugar; x++)
+            {
                 inventory.sugarCups.RemoveAt(0);
-                for (int y = 0; y < 5; y++)
-                {
-                    inventory.iceCubes.RemoveAt(0);
-                }
+            }
+            for (int x = 0; x < recipe.requiredIceCubes; x++)
+            {
+                inventory.iceCubes.RemoveAt(0);
             }
         }
     }
