@@ -57,5 +57,13 @@ namespace LemonadeStand
         {
             Console.WriteLine("You have ${0}", money);
         }
+        public void DisplayWeather(string weather, int temperature)
+        {
+            Console.WriteLine("The weather today is {0} with a temperature of {1}", weather, temperature);
+        }
+        public void RequestLemonadePrice()
+        {
+            Console.WriteLine("How many cents would you like to charge for a glass of lemonade?");
+        }
     }
 }

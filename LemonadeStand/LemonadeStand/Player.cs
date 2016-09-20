@@ -8,9 +8,9 @@ namespace LemonadeStand
 {
     abstract public class Player
     {
-        
-        public Store store;
-        public Stand stand;
+
+        public Store store = new Store();
+        public Stand stand = new Stand();
         public string name;
 
 

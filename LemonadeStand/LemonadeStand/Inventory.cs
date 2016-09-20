@@ -14,10 +14,19 @@ namespace LemonadeStand
         public int cubesIce;
         public int cupsOfLemonadeLeftInPitcher;
         public double money;
-        public List<Lemon> lemons;
-        public List<Cup> cups;
-        public List<Sugar> sugarCups;
-        public List<Ice> iceCubes;
+        public Inventory()
+        {
+            numberCups = 0;
+            numberLemons = 0;
+            cupsSugar = 0;
+            cubesIce = 0;
+            cupsOfLemonadeLeftInPitcher = 0;
+            money = 20.00;
+        }
+        public List<Lemon> lemons = new List<Lemon>();
+        public List<Cup> cups = new List<Cup>();
+        public List<Sugar> sugarCups = new List<Sugar>();
+        public List<Ice> iceCubes = new List<Ice>();
 
         
 

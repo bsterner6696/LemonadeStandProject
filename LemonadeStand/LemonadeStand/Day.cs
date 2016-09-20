@@ -9,10 +9,14 @@ namespace LemonadeStand
     public class Day
     {
         public int dayNumber;
-        public List<Customer> customers;
+        public List<Customer> customers = new List<Customer>();
         public Weather weather = new Weather();
         Random random = new Random();
         public int numberOfCustomers;
+        public Day()
+        {
+            numberOfCustomers = 70;
+        }
         
         public void GetNumberOfCustomers()
         {
@@ -23,7 +27,7 @@ namespace LemonadeStand
         {
             for (int x = 0; x < numberOfCustomers; x++)
             {
-                customers[x] = new Customer();
+                customers.Add(new Customer());
             }
         }
 
@@ -34,7 +38,7 @@ namespace LemonadeStand
                 customers[x].SetBasePrice();
             }
         }
-       
+        
         public void SetCustomerWeatherModifiers()
         {
             for (int x = 0; x < numberOfCustomers; x++)

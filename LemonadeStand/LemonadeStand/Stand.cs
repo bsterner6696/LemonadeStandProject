@@ -8,12 +8,14 @@ namespace LemonadeStand
 {
     public class Stand
     {
-        public Inventory inventory;
+        public Inventory inventory = new Inventory();
         public int priceLemonade;
 
         public void SellLemonade()
         {
             inventory.cupsOfLemonadeLeftInPitcher -= 1;
+            inventory.numberCups -= 1;
+            inventory.cups.RemoveAt(0);
             double aPenny = .01;
             inventory.money += priceLemonade * aPenny;
         }

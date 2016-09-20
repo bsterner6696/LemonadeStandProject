@@ -13,6 +13,10 @@ namespace LemonadeStand
         public int temperatureModifier;
         public int actualPriceWillingToPay;
         Random random = new Random();
+        public Customer()
+        {
+
+        }
 
         public void SetBasePrice()
         {

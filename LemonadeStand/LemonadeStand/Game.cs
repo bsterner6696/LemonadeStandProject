@@ -16,11 +16,20 @@ namespace LemonadeStand
 
         public Game()
         {
-            dayCount = 1;
+            dayCount = 0;
+        }
+
+        public void GenerateDays()
+        {
+            for (int x = 0; x < 7; x++)
+            {
+                days[x] = new Day();
+            }
         }
 
         public void Initialize()
         {
+            GenerateDays();
             GenerateWeather();
             GenerateCustomersForWeek();
             RunThroughDay();
@@ -50,7 +59,7 @@ namespace LemonadeStand
         {
             for (int x = 0; x < 7; x++)
             {
-                days[x].weather.weatherType = days[x].weather.GetWeatherType(days[x].weather.weatherReliability);
+                days[x].weather.weatherType = days[x].weather.GetWeatherType(forecast.forecastWeather[x]);
             }
         }
 
@@ -58,12 +67,13 @@ namespace LemonadeStand
         {
             for (int x = 0; x < 7; x++)
             {
-                days[x].weather.temperature = days[x].weather.GetTemperature(days[x].weather.temperatureReliability);
+                days[x].weather.temperature = days[x].weather.GetTemperature(forecast.forecastTemperature[x]);
             }
         }
 
         public void GenerateWeather()
         {
+            forecast.PopulateForecast();
             GenerateForecast();
             SetWeatherReliabilityForWeek();
             SetTemperatureReliabilityForWeek();
@@ -135,7 +145,7 @@ namespace LemonadeStand
 
         public void DisplayMoney()
         {
-            userInterface.DisplayMoney(player1.stand.inventory.money);
+            userInterface.DisplayMoney(Math.Round(player1.stand.inventory.money, 2));
         }
 
         public void BuyIngredients()
@@ -153,15 +163,26 @@ namespace LemonadeStand
 
         public void RunThroughDay()
         {
-            while (dayCount <= 7)
+            while (dayCount < 7)
             {
                 BuyIngredients();
+                
+                DisplayMoney();
+                userInterface.DisplayWeather(days[dayCount].weather.GetWeather(), days[dayCount].weather.temperature);
+                SetPriceForLemonade();
                 RunStandForDay();
+                AdvanceDay();
                 DisplayMoney();
                 Console.ReadLine();
-                AdvanceDay();
             }
         }
+
+        public void SetPriceForLemonade()
+        {
+            userInterface.RequestLemonadePrice();
+            player1.stand.priceLemonade = userInterface.GetNumberValue();
+        }
+
 
     }
 }

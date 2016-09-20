@@ -8,8 +8,8 @@ namespace LemonadeStand
 {
     public class Forecast
     {
-        int[] forecastWeather = new int[35];
-        int[] forecastTemperature = new int[35];
+        public int[] forecastWeather = new int[35];
+        public int[] forecastTemperature = new int[35];
         Random random = new Random();
         
         public void SetForecastWeather()
@@ -17,6 +17,15 @@ namespace LemonadeStand
             for (int i = 0; i < 35; i++)
             {
                 forecastWeather[i] = random.Next(0, 4);
+            }
+        }
+
+        public void PopulateForecast()
+        {
+            for (int x = 0; x < 35; x++)
+            {
+                forecastWeather[x] = 0;
+                forecastTemperature[x] = 60;
             }
         }
 
