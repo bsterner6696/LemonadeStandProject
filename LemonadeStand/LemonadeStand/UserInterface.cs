@@ -84,7 +84,7 @@ namespace LemonadeStand
             Console.WriteLine("They cost ${0} each.", price);
         }
         
-        public void DisplayMoney(double money)
+        public void DisplayMoney(string money)
         {
             Console.WriteLine("You have ${0}", money);
         }
@@ -100,6 +100,15 @@ namespace LemonadeStand
         public void AnnounceEndOfDay(int dayNumber)
         {
             Console.WriteLine("Completed day number {0}!", dayNumber);
+        }
+
+        public void DisplayCupsSold(int number)
+        {
+            Console.WriteLine("{0} cups of lemonade sold today.", number);
+        }
+        public void DisplayIceMelted()
+        {
+            Console.WriteLine("Your ice has melted!");
         }
     }
 }

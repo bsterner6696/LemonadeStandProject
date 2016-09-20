@@ -13,6 +13,7 @@ namespace LemonadeStand
         Forecast forecast = new Forecast();
         UserInterface userInterface = new UserInterface();
         int dayCount;
+        int cupsBefore;
 
         public Game()
         {
@@ -201,7 +202,7 @@ namespace LemonadeStand
 
         public void DisplayMoney()
         {
-            userInterface.DisplayMoney(Math.Round(player1.stand.inventory.money, 2));
+            userInterface.DisplayMoney(string.Format("{0:0.00}", Math.Round(player1.stand.inventory.money, 2)));
         }
 
         public void BuyIngredients()
@@ -232,15 +233,17 @@ namespace LemonadeStand
                 userInterface.DisplayWeather(days[dayCount].weather.GetWeather(), days[dayCount].weather.temperature);
                 SetPriceForLemonade();
                 Console.Clear();
-                BuyIngredients();                
-                DisplayMoney();
-                userInterface.DisplayInventory(player1.stand.inventory.numberCups, "cups");
+                BuyIngredients();
+                StoreNumberCups();                
                 RunStandForDay();
                 userInterface.AnnounceEndOfDay(dayCount+1);
+                DisplayCupsSold();
                 DisplayMoney();
-                userInterface.DisplayInventory(player1.stand.inventory.numberCups, "cups");
-                AdvanceDay();                
+                AdvanceDay();
+                ResetInventory();
+                userInterface.DisplayIceMelted();                
                 Console.ReadLine();
+                Console.Clear();
             }
         }
 
@@ -258,6 +261,23 @@ namespace LemonadeStand
                 userInterface.DisplayForecast(forecast.forecastWeather[x + 1], forecast.forecastTemperature[x + 1], x + 2);
             }
 
+        }
+
+        public void StoreNumberCups()
+        {
+            cupsBefore = player1.stand.inventory.numberCups;
+        }
+
+        public void DisplayCupsSold()
+        {
+            userInterface.DisplayCupsSold(cupsBefore - player1.stand.inventory.numberCups);
+        }
+
+        public void ResetInventory()
+        {
+            player1.stand.inventory.iceCubes.Clear();
+            player1.stand.inventory.cubesIce = 0;
+            player1.stand.inventory.cupsOfLemonadeLeftInPitcher = 0;
         }
     }
 }
