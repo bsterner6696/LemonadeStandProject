@@ -71,7 +71,7 @@ namespace LemonadeStand
                 Console.WriteLine("Enter a valid number.");
                 DetermineNumberOfDays();
             }
-            if (amount <= 28 && amount >= 1)
+            if (amount <= 28 && amount >= 7)
             {
                 totalDays = amount;
             } else

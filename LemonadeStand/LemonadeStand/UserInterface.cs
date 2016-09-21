@@ -121,7 +121,7 @@ namespace LemonadeStand
         public static void PromptTotalDays()
         {
             Console.WriteLine("Please enter the desired number of in game days to play.");
-            Console.WriteLine("Enter a number between 1 and 28.");
+            Console.WriteLine("Enter a number between 7 and 28.");
         }
     }
 }
