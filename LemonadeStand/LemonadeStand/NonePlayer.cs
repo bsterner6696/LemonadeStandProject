@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    public class ComputerPlayer : Player
+    public class NonePlayer : ComputerPlayer
     {
-        public ComputerPlayer()
+        public NonePlayer()
         {
-            name = "the computer";
+            stand.priceLemonade = 50; 
         }
     }
 }

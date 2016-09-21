@@ -8,5 +8,9 @@ namespace LemonadeStand
 {
     public class HumanPlayer : Player
     {
+        public HumanPlayer(string name)
+        {
+            this.name = name;
+        }
     }
 }

@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    public class UserInterface
+    static public class UserInterface
     {
-        int numberValue;
+        
 
-        public void PromptForName(string name)
+        public static void PromptForName(string name)
         {
             Console.WriteLine("Please enter name for {0}.", name);
         }
 
         
-        public void DisplayForecast(int type, int temperature, int dayNumber)
+        public static void DisplayForecast(int type, int temperature, int dayNumber)
         {
             string weatherType;
             switch (type)
@@ -46,72 +46,56 @@ namespace LemonadeStand
             Console.WriteLine("The weather for day number {0} will be {1} and {2} degrees.", dayNumber, weatherType, temperature);
         }
 
-        public void AnnounceForecast()
+        public static void AnnounceForecast()
         {
             Console.WriteLine("Now it is time for the forecast for the next seven days.");
         }
-        public void SetNumberValue()
+        
+
+
+        public static void DisplayInventory(int number, string itemName, string name)
         {
-            string amount = Console.ReadLine();
-            int amt;
-            if (Int32.TryParse(amount, out amt))
-            {
-                numberValue = amt;
-            } else
-            {
-                Console.WriteLine("Enter a valid number.");
-                SetNumberValue();
-            }
-        }
-        public int GetNumberValue()
-        {
-            SetNumberValue();
-            return numberValue;
+            Console.WriteLine("{0}, you have {1} {2}.",name, number, itemName);
         }
 
-        public void DisplayInventory(int number, string itemName)
-        {
-            Console.WriteLine("You have {0} {1}.", number, itemName);
-        }
-
-        public void PromptToBuy(string itemName)
+        public static void PromptToBuy(string itemName)
         {
             Console.WriteLine("How many {0} would you like to buy?", itemName);
         }
 
-        public void DisplayPricePer(double price)
+        public static void DisplayPricePer(double price)
         {
             Console.WriteLine("They cost ${0} each.", price);
         }
         
-        public void DisplayMoney(string money)
+        public static void DisplayMoney(string money, string name)
         {
-            Console.WriteLine("You have ${0}", money);
+            Console.WriteLine("{0}, you have ${1}",name, money);
         }
-        public void DisplayWeather(string weather, int temperature)
+        public static void DisplayWeather(string weather, int temperature)
         {
             Console.WriteLine("The weather today is {0} with a temperature of {1}", weather, temperature);
         }
-        public void RequestLemonadePrice()
+        public static void RequestLemonadePrice()
         {
             Console.WriteLine("How many cents would you like to charge for a glass of lemonade?");
         }
 
-        public void AnnounceEndOfDay(int dayNumber)
+        public static void AnnounceEndOfDay(int dayNumber)
         {
             Console.WriteLine("Completed day number {0}!", dayNumber);
         }
 
-        public void DisplayCupsSold(int number)
+        public static void DisplayCupsSold(int number)
         {
             Console.WriteLine("{0} cups of lemonade sold today.", number);
         }
-        public void DisplayIceMelted()
+        public static void DisplayIceMelted()
         {
             Console.WriteLine("Your ice has melted!");
         }
 
-        public void DisplayWelcomeMessage()
+        public static void DisplayWelcomeMessage()
         {
             Console.WriteLine("Welcome to Lemonade Stand!");
             Console.WriteLine("In this game you will buy ingredients to make lemonade, and run a stand to sell it.");
@@ -120,6 +104,18 @@ namespace LemonadeStand
             Console.WriteLine("A pitcher holds 10 cups of lemonade.");
             Console.WriteLine("A pitcher of lemonade requires 4 lemons, 4 cups of sugar, and 20 ice cubes to make.");
             Console.WriteLine("Good luck!");
+        }
+
+        public static void RequestName(Player player)
+        {
+            Console.WriteLine("Enter name for {0}.", player.name);
+        }
+
+        public static void ListGameModeOptions()
+        {
+            Console.WriteLine("Enter 'alone' to play on your own.");
+            Console.WriteLine("Enter 'computer' to play vs computer.");
+            Console.WriteLine("Enter '2' to play with 2 players.");
         }
     }
 }
