@@ -10,12 +10,13 @@ namespace LemonadeStand
     {
         Player player1;
         Player player2;
+        Player[] players = new Player[2];
+
         Day[] days = new Day[35];
         Forecast forecast = new Forecast();
         Store store = new Store();
         int dayCount;
-        int cupsBefore;
-
+        
         public Game()
         {
             dayCount = 0;
@@ -52,11 +53,16 @@ namespace LemonadeStand
                     SetGameMode();
                     break;
             }
+            players[0] = player1;
+            players[1] = player2;
 
         }
 
         public void Initialize()
         {
+            SetGameMode();
+            player1.SetName();
+            player2.SetName();
             GenerateDays();
             GenerateWeather();
             GenerateCustomersForWeek();
@@ -64,12 +70,6 @@ namespace LemonadeStand
             Console.ReadLine();
             Console.Clear();
             LoopThroughDays();
-        }
-
-        public void SetName(Player player)
-        {
-            UserInterface.RequestName(player);
-            player.SetName();
         }
 
         public void SetWeatherForWeek()
@@ -118,26 +118,18 @@ namespace LemonadeStand
             }
         }
         
-        public void RunStandForDay()
+        
+
+        public int DetermineCheaperPrice()
         {
-            foreach (Customer customer in days[dayCount].customers)
+            if (player1.stand.priceLemonade <= player2.stand.priceLemonade)
             {
-                if (customer.actualPriceWillingToPay >= player1.stand.priceLemonade && player1.stand.inventory.cups.Count() > 0)
-                {
-                        if (player1.stand.inventory.cupsOfLemonadeLeftInPitcher > 0)
-                        {
-                            player1.stand.SellLemonade();
-                        }
-                        else if (player1.stand.inventory.sugarCups.Count() >= player1.stand.recipe.requiredCupsOfSugar && player1.stand.inventory.lemons.Count() >= player1.stand.recipe.requiredLemons && player1.stand.inventory.iceCubes.Count() >= player1.stand.recipe.requiredIceCubes)
-                        {
-                            player1.stand.MakeLemonade();
-                            player1.stand.SellLemonade();
-                        }
-                }
+                return 0;
+            }else
+            {
+                return 1;
             }
         }
-
-        
 
         public void AdvanceDay()
         {
@@ -148,30 +140,21 @@ namespace LemonadeStand
         {
             while (dayCount < 7)
             {
-                days[dayCount].GoThroughDay(RunThroughDay);
+                DisplayForecast();
+                Console.ReadLine();
+                Console.Clear();
+                days[dayCount].GoThroughDay(player1, player2, store);
+                UserInterface.AnnounceEndOfDay(dayCount + 1);
+                player1.DisplayCupsSold(days[dayCount].numberOfCustomers);
+                player1.DisplayMoney();
+                player2.DisplayCupsSold(days[dayCount].numberOfCustomers);
+                player2.DisplayMoney();
+                player1.ResetInventory();
+                player2.ResetInventory();
+                Console.ReadLine();
+                Console.Clear();
+                AdvanceDay();
             }
-        }
-
-        public void RunThroughDay()
-        {
-            DisplayForecast(); 
-            Console.ReadLine();
-            Console.Clear();
-            player1.DisplayMoney(); 
-            UserInterface.DisplayWeather(days[dayCount].weather.GetWeather(), days[dayCount].weather.temperature); 
-            player1.SetPriceLemonade();
-            Console.Clear();
-            player1.BuyIngredients(store.priceCups, store.priceIce, store.priceLemons, store.priceSugar); 
-            player1.StoreNumberCups();             
-            RunStandForDay();
-            UserInterface.AnnounceEndOfDay(dayCount + 1);
-            player1.DisplayCupsSold();
-            player1.DisplayMoney();
-            AdvanceDay(); 
-            player1.ResetInventory();
-            UserInterface.DisplayIceMelted();   
-            Console.ReadLine();
-            Console.Clear();
         }
 
         public void DisplayForecast()

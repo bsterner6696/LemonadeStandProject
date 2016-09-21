@@ -86,9 +86,9 @@ namespace LemonadeStand
             Console.WriteLine("Completed day number {0}!", dayNumber);
         }
 
-        public static void DisplayCupsSold(int number)
+        public static void DisplayCupsSold(int number, string name, int total)
         {
-            Console.WriteLine("{0} cups of lemonade sold today.", number);
+            Console.WriteLine("{0}: {1} cups of lemonade sold today out of a possible {2}.", name, number, total);
         }
         public static void DisplayIceMelted()
         {
@@ -106,9 +106,9 @@ namespace LemonadeStand
             Console.WriteLine("Good luck!");
         }
 
-        public static void RequestName(Player player)
+        public static void RequestName(string name)
         {
-            Console.WriteLine("Enter name for {0}.", player.name);
+            Console.WriteLine("Enter name for {0}.", name);
         }
 
         public static void ListGameModeOptions()

@@ -11,11 +11,12 @@ namespace LemonadeStand
 
         public Stand stand = new Stand();
         public string name;
-        public bool isComputer;
         public int cupsBefore;
+        static public Random random = new Random();
 
-        public void SetName()
+        public virtual void SetName()
         {
+            UserInterface.RequestName(name);
             name = Console.ReadLine();
         }
 
@@ -70,7 +71,7 @@ namespace LemonadeStand
                 SetPriceLemonade();
             }
         }
-        public void ShopForCups(double priceCups)
+        public virtual void ShopForCups(double priceCups)
         {
 
                 UserInterface.DisplayInventory(stand.inventory.cups.Count(), "cups", name);
@@ -104,7 +105,7 @@ namespace LemonadeStand
             }
         }
 
-        public void ShopForIce(double priceIce)
+        public virtual void ShopForIce(double priceIce)
         {
 
                 UserInterface.DisplayInventory(stand.inventory.iceCubes.Count(), "ice cubes", name);
@@ -139,7 +140,7 @@ namespace LemonadeStand
             }
         }
 
-        public void ShopForLemons(double priceLemons)
+        public virtual void ShopForLemons(double priceLemons)
         {
 
                 UserInterface.DisplayInventory(stand.inventory.lemons.Count(), "lemons", name);
@@ -172,7 +173,7 @@ namespace LemonadeStand
                 TryToBuyLemons(priceLemons);
             }
         }
-        public void ShopForSugar(double priceSugar)
+        public virtual void ShopForSugar(double priceSugar)
         {
                 UserInterface.DisplayInventory(stand.inventory.sugarCups.Count(), "cups of sugar", name);
                 UserInterface.PromptToBuy("cups of sugar");
@@ -205,12 +206,12 @@ namespace LemonadeStand
             }
         }
 
-        public void DisplayMoney()
+        public virtual void DisplayMoney()
         {
             UserInterface.DisplayMoney(string.Format("{0:0.00}", Math.Round(stand.inventory.money, 2)), name);
         }
 
-        public void BuyIngredients(double priceCups, double priceIce, double priceLemons, double priceSugar)
+        public virtual void BuyIngredients(double priceCups, double priceIce, double priceLemons, double priceSugar)
         {
             ShopForCups(priceCups);
             Console.Clear();
@@ -226,9 +227,9 @@ namespace LemonadeStand
             cupsBefore = stand.inventory.cups.Count();
         }
 
-        public void DisplayCupsSold()
+        public virtual void DisplayCupsSold(int total)
         {
-            UserInterface.DisplayCupsSold(cupsBefore - stand.inventory.cups.Count());
+            UserInterface.DisplayCupsSold(cupsBefore - stand.inventory.cups.Count(), name, total);
         }
         public void ResetInventory()
         {

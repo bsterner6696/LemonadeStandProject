@@ -6,11 +6,34 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    public class NonePlayer : ComputerPlayer
+    public class NonePlayer : Player
     {
         public NonePlayer()
         {
             stand.priceLemonade = 50; 
+        }
+        public override void SetName()
+        {
+            
+        }
+        public override void SetPriceLemonade()
+        {
+            
+        }
+
+        public override void DisplayMoney()
+        {
+            
+        }
+
+        public override void BuyIngredients(double priceCups, double priceIce, double priceLemons, double priceSugar)
+        {
+            
+        }
+
+        public override void DisplayCupsSold(int total)
+        {
+            
         }
     }
 }

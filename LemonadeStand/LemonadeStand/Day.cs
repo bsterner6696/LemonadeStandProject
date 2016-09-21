@@ -74,11 +74,46 @@ namespace LemonadeStand
             SetCustomerActualPrice();
         }
 
-        public void GoThroughDay(Action tasksForDay)
+        public void GoThroughDay(Player player1, Player player2, Store store)
         {
-            tasksForDay();
+            
+            player1.DisplayMoney();
+            UserInterface.DisplayWeather(weather.GetWeather(), weather.temperature);
+            player1.SetPriceLemonade();
+            Console.Clear();
+            player2.DisplayMoney();
+            UserInterface.DisplayWeather(weather.GetWeather(), weather.temperature);
+            player2.SetPriceLemonade();
+            Console.Clear();
+            player1.BuyIngredients(store.priceCups, store.priceIce, store.priceLemons, store.priceSugar);
+            player1.StoreNumberCups();
+            Console.ReadLine();
+            player2.BuyIngredients(store.priceCups, store.priceIce, store.priceLemons, store.priceSugar);
+            player2.StoreNumberCups();
+            RunStandForDay(player1);
+            RunStandForDay(player2);
+            UserInterface.DisplayIceMelted();
+            
         }
+        public void RunStandForDay(Player player)
+        {
+            foreach (Customer customer in customers)
+            {
+                if (customer.actualPriceWillingToPay >= player.stand.priceLemonade && player.stand.inventory.cups.Count() > 0)
+                {
+                    if (player.stand.inventory.cupsOfLemonadeLeftInPitcher > 0)
+                    {
+                        player.stand.SellLemonade();
+                    }
+                    else if (player.stand.inventory.sugarCups.Count() >= player.stand.recipe.requiredCupsOfSugar && player.stand.inventory.lemons.Count() >= player.stand.recipe.requiredLemons && player.stand.inventory.iceCubes.Count() >= player.stand.recipe.requiredIceCubes)
+                    {
+                        player.stand.MakeLemonade();
+                        player.stand.SellLemonade();
+                    }
+                }
+            }
 
+        }
 
     }
 }
