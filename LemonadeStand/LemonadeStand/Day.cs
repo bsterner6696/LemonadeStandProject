@@ -92,7 +92,7 @@ namespace LemonadeStand
             player2.StoreNumberCups();
             RunStandForDay(player1);
             RunStandForDay(player2);
-            UserInterface.DisplayIceMelted();
+            
             
         }
         public void RunStandForDay(Player player)

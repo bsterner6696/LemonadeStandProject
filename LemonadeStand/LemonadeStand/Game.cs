@@ -11,8 +11,8 @@ namespace LemonadeStand
         Player player1;
         Player player2;
         Player[] players = new Player[2];
-
-        Day[] days = new Day[35];
+        public int totalDays;
+        Day[] days = new Day[40];
         Forecast forecast = new Forecast();
         Store store = new Store();
         int dayCount;
@@ -24,7 +24,7 @@ namespace LemonadeStand
 
         public void GenerateDays()
         {
-            for (int x = 0; x < 35; x++)
+            for (int x = 0; x < 40; x++)
             {
                 days[x] = new Day();
             }
@@ -58,8 +58,31 @@ namespace LemonadeStand
 
         }
 
+        public void DetermineNumberOfDays()
+        {
+            UserInterface.PromptTotalDays();
+            string amt = Console.ReadLine();
+            int amount;
+            if (Int32.TryParse(amt, out amount))
+            {
+            }
+            else
+            {
+                Console.WriteLine("Enter a valid number.");
+                DetermineNumberOfDays();
+            }
+            if (amount <= 28 && amount >= 1)
+            {
+                totalDays = amount;
+            } else
+            {
+                DetermineNumberOfDays();
+            }
+        }
+
         public void Initialize()
         {
+            DetermineNumberOfDays();
             SetGameMode();
             player1.SetName();
             player2.SetName();
@@ -74,7 +97,7 @@ namespace LemonadeStand
 
         public void SetWeatherForWeek()
         {
-            for (int x = 0; x < 7; x++)
+            for (int x = 0; x < 40; x++)
             {
                 days[x].weather.SetWeatherType();
             }
@@ -82,7 +105,7 @@ namespace LemonadeStand
 
         public void SetWeatherForecastForWeek()
         {
-            for (int x = 0; x < 7; x++)
+            for (int x = 0; x < 40; x++)
             {
                 days[x].weather.forecast.SetForecastWeather(days[x].weather.weatherType);
             }
@@ -90,14 +113,14 @@ namespace LemonadeStand
 
         public void SetTemperatureForecastForWeek()
         {
-            for (int x = 0; x < 7; x++)
+            for (int x = 0; x < 40; x++)
             {
                 days[x].weather.forecast.SetForecastTemperature(days[x].weather.temperature);
             }
         }
         public void SetTemperatureForWeek()
         {
-            for (int x = 0; x < 7; x++)
+            for (int x = 0; x < 40; x++)
             {
                days[x].weather.SetTemperature();
             }
@@ -112,7 +135,7 @@ namespace LemonadeStand
         }
         public void GenerateCustomersForWeek()
         {
-            for (int x = 0; x < 7; x++)
+            for (int x = 0; x < 40; x++)
             {
                 days[x].GenerateCustomers();
             }
@@ -138,7 +161,7 @@ namespace LemonadeStand
 
         public void LoopThroughDays()
         {
-            while (dayCount < 7)
+            while (dayCount < totalDays)
             {
                 DisplayForecast();
                 Console.ReadLine();
@@ -151,6 +174,7 @@ namespace LemonadeStand
                 player2.DisplayMoney();
                 player1.ResetInventory();
                 player2.ResetInventory();
+                UserInterface.DisplayIceMelted();
                 Console.ReadLine();
                 Console.Clear();
                 AdvanceDay();

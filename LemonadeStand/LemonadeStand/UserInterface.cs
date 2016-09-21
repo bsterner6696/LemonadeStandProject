@@ -117,5 +117,11 @@ namespace LemonadeStand
             Console.WriteLine("Enter 'computer' to play vs computer.");
             Console.WriteLine("Enter '2' to play with 2 players.");
         }
+
+        public static void PromptTotalDays()
+        {
+            Console.WriteLine("Please enter the desired number of in game days to play.");
+            Console.WriteLine("Enter a number between 1 and 28.");
+        }
     }
 }

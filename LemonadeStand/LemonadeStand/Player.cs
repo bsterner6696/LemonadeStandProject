@@ -57,7 +57,7 @@ namespace LemonadeStand
         }
         public virtual void SetPriceLemonade()
         {
-            Console.WriteLine("How many cents would you like to charge for a glass of lemonade?");
+            UserInterface.RequestLemonadePrice();
             string price = Console.ReadLine();
             int prc;
             if (Int32.TryParse(price, out prc))
