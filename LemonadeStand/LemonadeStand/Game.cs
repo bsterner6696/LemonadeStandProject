@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace LemonadeStand
 {
@@ -16,6 +17,8 @@ namespace LemonadeStand
         Forecast forecast = new Forecast();
         Store store = new Store();
         int dayCount;
+        FileReader fileReader = new FileReader();
+        FileWriter fileWriter = new FileWriter();
         
         public Game()
         {
@@ -84,15 +87,19 @@ namespace LemonadeStand
         {
             DetermineNumberOfDays();
             SetGameMode();
+            File.WriteAllText("dayLog.txt", String.Empty);
             player1.SetName();
             player2.SetName();
             GenerateDays();
             GenerateWeather();
             GenerateCustomersForWeek();
+            Console.Clear();
             UserInterface.DisplayWelcomeMessage();
             Console.ReadLine();
             Console.Clear();
             LoopThroughDays();
+            ReviewGameScores();
+            Console.ReadLine();
         }
 
         public void SetWeatherForWeek()
@@ -177,6 +184,7 @@ namespace LemonadeStand
                 UserInterface.DisplayIceMelted();
                 Console.ReadLine();
                 Console.Clear();
+                LogDaysEarnings();
                 AdvanceDay();
             }
         }
@@ -190,7 +198,16 @@ namespace LemonadeStand
             }
         }
 
+        public void LogDaysEarnings()
+        {
+            fileWriter.WriteScore(player1.name, string.Format("{0:0.00}", Math.Round(player1.stand.inventory.money, 2)), dayCount + 1);
+            fileWriter.WriteScore(player2.name, string.Format("{0:0.00}", Math.Round(player2.stand.inventory.money, 2)), dayCount + 1);
+        }
 
-        
+        public void ReviewGameScores()
+        {
+            Console.WriteLine("End of Game Statistics");
+            Console.WriteLine(fileReader.ReadFile("dayLog.txt")); ;
+        }
     }
 }

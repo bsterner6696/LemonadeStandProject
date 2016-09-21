@@ -1,0 +1,14 @@
+;30.00 : Ben : Day 1
+;24.88 : Compy : Day 1
+;34.00 : Ben : Day 2
+;32.92 : Compy : Day 2
+;35.08 : Ben : Day 3
+;31.28 : Compy : Day 3
+;33.95 : Ben : Day 4
+;25.40 : Compy : Day 4
+;38.13 : Ben : Day 5
+;25.64 : Compy : Day 5
+;39.75 : Ben : Day 6
+;28.01 : Compy : Day 6
+;44.29 : Ben : Day 7
+;36.85 : Compy : Day 7

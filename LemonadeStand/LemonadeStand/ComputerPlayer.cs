@@ -9,7 +9,7 @@ namespace LemonadeStand
     public class ComputerPlayer : Player
     {
         public int minPrice = 10;
-        public int maxPrice = 42;
+        public int maxPrice = 32;
 
         public ComputerPlayer()
         {
