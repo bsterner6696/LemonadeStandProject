@@ -15,7 +15,6 @@ namespace LemonadeStand
         public void SellLemonade()
         {
             inventory.cupsOfLemonadeLeftInPitcher -= 1;
-            inventory.numberCups -= 1;
             inventory.cups.RemoveAt(0);
             double aPenny = .01;
             inventory.money += priceLemonade * aPenny;
@@ -23,9 +22,6 @@ namespace LemonadeStand
 
         public void MakeLemonade()
         {
-            inventory.numberLemons -= recipe.requiredLemons;
-            inventory.cupsSugar -= recipe.requiredCupsOfSugar;
-            inventory.cubesIce -= recipe.requiredIceCubes;
             inventory.cupsOfLemonadeLeftInPitcher = 10;
             for (int x = 0; x < recipe.requiredLemons; x++)
             {

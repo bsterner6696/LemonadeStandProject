@@ -20,7 +20,6 @@ namespace LemonadeStand
         public void BuyIce(int amount, double price)
         {
             stand.inventory.money -= (amount * price);
-            stand.inventory.cubesIce += amount;
             for (int x = 0; x < amount; x++)
             {
                 stand.inventory.iceCubes.Add(new Ice());
@@ -29,7 +28,6 @@ namespace LemonadeStand
         public void BuyLemons(int amount, double price)
         {
             stand.inventory.money -= (amount * price);
-            stand.inventory.numberLemons += amount;
             for (int x = 0; x < amount; x++)
             {
                 stand.inventory.lemons.Add(new Lemon());
@@ -39,7 +37,6 @@ namespace LemonadeStand
         public void BuySugar(int amount, double price)
         {
             stand.inventory.money -= (amount * price);
-            stand.inventory.cupsSugar += amount;
             for (int x = 0; x < amount; x++)
             {
                 stand.inventory.sugarCups.Add(new Sugar());
@@ -49,7 +46,6 @@ namespace LemonadeStand
         public void BuyCups(int amount, double price)
         {
             stand.inventory.money -= (amount * price);
-            stand.inventory.numberCups += amount;
             for (int x = 0; x < amount; x++)
             {
                 stand.inventory.cups.Add(new Cup());

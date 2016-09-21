@@ -38,9 +38,7 @@ namespace LemonadeStand
             Console.ReadLine();
             Console.Clear();
             LoopThroughDays();
-
         }
-
 
         public void SetWeatherForWeek()
         {
@@ -92,13 +90,13 @@ namespace LemonadeStand
         {
             foreach (Customer customer in days[dayCount].customers)
             {
-                if (customer.actualPriceWillingToPay >= player1.stand.priceLemonade && player1.stand.inventory.numberCups > 0)
+                if (customer.actualPriceWillingToPay >= player1.stand.priceLemonade && player1.stand.inventory.cups.Count() > 0)
                 {
                         if (player1.stand.inventory.cupsOfLemonadeLeftInPitcher > 0)
                         {
                             player1.stand.SellLemonade();
                         }
-                        else if (player1.stand.inventory.cupsSugar >= player1.stand.recipe.requiredCupsOfSugar && player1.stand.inventory.numberLemons >= player1.stand.recipe.requiredLemons && player1.stand.inventory.cubesIce >= player1.stand.recipe.requiredIceCubes)
+                        else if (player1.stand.inventory.sugarCups.Count() >= player1.stand.recipe.requiredCupsOfSugar && player1.stand.inventory.lemons.Count() >= player1.stand.recipe.requiredLemons && player1.stand.inventory.iceCubes.Count() >= player1.stand.recipe.requiredIceCubes)
                         {
                             player1.stand.MakeLemonade();
                             player1.stand.SellLemonade();
@@ -107,10 +105,9 @@ namespace LemonadeStand
             }
         }
 
-
         public void ShopForCups()
         {
-            userInterface.DisplayInventory(player1.stand.inventory.numberCups, "cups");
+            userInterface.DisplayInventory(player1.stand.inventory.cups.Count(), "cups");
             userInterface.PromptToBuy("cups");
             userInterface.DisplayPricePer(store.priceCups);
             DisplayMoney();
@@ -131,15 +128,13 @@ namespace LemonadeStand
             }
         }
 
-
         public void ShopForIce()
         {
-            userInterface.DisplayInventory(player1.stand.inventory.cubesIce, "ice cubes");
+            userInterface.DisplayInventory(player1.stand.inventory.iceCubes.Count(), "ice cubes");
             userInterface.PromptToBuy("ice cubes");
             userInterface.DisplayPricePer(store.priceIce);
             DisplayMoney();
-            BuyIce();
-            
+            BuyIce();            
         }
 
         public void BuyIce()
@@ -157,7 +152,7 @@ namespace LemonadeStand
 
         public void ShopForLemons()
         {
-            userInterface.DisplayInventory(player1.stand.inventory.numberLemons, "lemons");
+            userInterface.DisplayInventory(player1.stand.inventory.lemons.Count(), "lemons");
             userInterface.PromptToBuy("lemons");
             userInterface.DisplayPricePer(store.priceLemons);
             DisplayMoney();
@@ -178,7 +173,7 @@ namespace LemonadeStand
         }
         public void ShopForSugar()
         {
-            userInterface.DisplayInventory(player1.stand.inventory.cupsSugar, "cups of sugar");
+            userInterface.DisplayInventory(player1.stand.inventory.sugarCups.Count(), "cups of sugar");
             userInterface.PromptToBuy("cups of sugar");
             userInterface.DisplayPricePer(store.priceSugar);
             DisplayMoney();
@@ -263,23 +258,21 @@ namespace LemonadeStand
             {
                 userInterface.DisplayForecast(days[x + 1].weather.forecast.forecastWeather, days[x + 1].weather.forecast.forecastTemperature, x + 2);
             }
-
         }
 
         public void StoreNumberCups()
         {
-            cupsBefore = player1.stand.inventory.numberCups;
+            cupsBefore = player1.stand.inventory.cups.Count();
         }
 
         public void DisplayCupsSold()
         {
-            userInterface.DisplayCupsSold(cupsBefore - player1.stand.inventory.numberCups);
+            userInterface.DisplayCupsSold(cupsBefore - player1.stand.inventory.cups.Count());
         }
 
         public void ResetInventory()
         {
             player1.stand.inventory.iceCubes.Clear();
-            player1.stand.inventory.cubesIce = 0;
             player1.stand.inventory.cupsOfLemonadeLeftInPitcher = 0;
         }
     }
