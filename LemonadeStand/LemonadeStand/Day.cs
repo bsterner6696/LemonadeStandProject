@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
+using System.Reflection;
 
 namespace LemonadeStand
 {
@@ -79,16 +81,21 @@ namespace LemonadeStand
             
             player1.DisplayMoney();
             UserInterface.DisplayTodaysForecast(weather.forecast.GetForecastWeather(), weather.forecast.forecastTemperature);
+            (new SoundPlayer("grunt.wav")).Play();
             player1.SetPriceLemonade();
+            (new SoundPlayer("grunt.wav")).Play();
             Console.Clear();
             player2.DisplayMoney();
             UserInterface.DisplayTodaysForecast(weather.forecast.GetForecastWeather(), weather.forecast.forecastTemperature);
             player2.SetPriceLemonade();
+            (new SoundPlayer("grunt.wav")).Play();
             Console.Clear();
             player1.BuyIngredients(store.priceCups, store.priceIce, store.priceLemons, store.priceSugar);
+            (new SoundPlayer("grunt.wav")).Play();
             player1.StoreNumberCups();
             Console.Clear();
             player2.BuyIngredients(store.priceCups, store.priceIce, store.priceLemons, store.priceSugar);
+            (new SoundPlayer("grunt.wav")).Play();
             player2.StoreNumberCups();
             RunStandForDay(player1);
             RunStandForDay(player2);

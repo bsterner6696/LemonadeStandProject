@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace LemonadeStand
 {
@@ -59,6 +60,7 @@ namespace LemonadeStand
         public virtual void SetPriceLemonade()
         {
             UserInterface.RequestLemonadePrice();
+            (new SoundPlayer("grunt.wav")).Play();
             string price = Console.ReadLine();
             int prc;
             if (Int32.TryParse(price, out prc))
@@ -85,6 +87,7 @@ namespace LemonadeStand
 
         public void TryToBuyCups(double priceCups)
         {
+            (new SoundPlayer("grunt.wav")).Play();
             string amt = Console.ReadLine();
             int amount;
             if (Int32.TryParse(amt, out amount))
@@ -120,6 +123,7 @@ namespace LemonadeStand
 
         public void TryToBuyIce(double priceIce)
         {
+            (new SoundPlayer("grunt.wav")).Play();
             string amt = Console.ReadLine();
             int amount;
             if (Int32.TryParse(amt, out amount))
@@ -154,6 +158,7 @@ namespace LemonadeStand
 
         public void TryToBuyLemons(double priceLemons)
         {
+            (new SoundPlayer("grunt.wav")).Play();
             string amt = Console.ReadLine();
             int amount;
             if (Int32.TryParse(amt, out amount))
@@ -186,6 +191,7 @@ namespace LemonadeStand
 
         public void TryToBuySugar(double sugarPrice)
         {
+            (new SoundPlayer("grunt.wav")).Play();
             string amt = Console.ReadLine();
             int amount;
             if (Int32.TryParse(amt, out amount))
@@ -215,12 +221,16 @@ namespace LemonadeStand
         public virtual void BuyIngredients(double priceCups, double priceIce, double priceLemons, double priceSugar)
         {
             ShopForCups(priceCups);
+            
             Console.Clear();
             ShopForIce(priceIce);
+            
             Console.Clear();
             ShopForLemons(priceLemons);
+            
             Console.Clear();
             ShopForSugar(priceSugar);
+            
             Console.Clear();
         }
         public void StoreNumberCups()

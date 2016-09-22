@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Media;
+using System.Reflection;
 
 namespace LemonadeStand
 {
@@ -19,6 +21,7 @@ namespace LemonadeStand
         int dayCount;
         FileReader fileReader = new FileReader();
         FileWriter fileWriter = new FileWriter();
+
         
         public Game()
         {
@@ -36,20 +39,21 @@ namespace LemonadeStand
         public void SetGameMode()
         {
             UserInterface.ListGameModeOptions();
+            (new SoundPlayer("grunt.wav")).Play();
             string choice = Console.ReadLine();
             switch (choice)
             {
                 case "alone":
-                    player1 = new HumanPlayer("player 1");
+                    player1 = new Human("player 1");
                     player2 = new NonePlayer();
                     break;
                 case "computer":
-                    player1 = new HumanPlayer("player 1");
-                    player2 = new ComputerPlayer();
+                    player1 = new Human("player 1");
+                    player2 = new Computer();
                     break;
                 case "2":
-                    player1 = new HumanPlayer("player 1");
-                    player2 = new HumanPlayer("player 2");
+                    player1 = new Human("player 1");
+                    player2 = new Human("player 2");
                     break;
                 default:
                     Console.WriteLine("Enter valid option");
@@ -64,6 +68,7 @@ namespace LemonadeStand
         public void DetermineNumberOfDays()
         {
             UserInterface.PromptTotalDays();
+            (new SoundPlayer("grunt.wav")).Play();
             string amt = Console.ReadLine();
             int amount;
             if (Int32.TryParse(amt, out amount))
@@ -86,21 +91,29 @@ namespace LemonadeStand
         public void Initialize()
         {
             DetermineNumberOfDays();
+            (new SoundPlayer("grunt.wav")).Play();
             SetGameMode();
+            (new SoundPlayer("grunt.wav")).Play();
             File.WriteAllText("dayLog.txt", String.Empty);
             Console.Clear();
             player1.SetName();
+            (new SoundPlayer("grunt.wav")).Play();
             player2.SetName();
+            (new SoundPlayer("grunt.wav")).Play();
             GenerateDays();
             GenerateWeather();
             GenerateCustomersForWeek();
             Console.Clear();
             UserInterface.DisplayWelcomeMessage();
+            (new SoundPlayer("grunt.wav")).Play();
             Console.ReadLine();
             Console.Clear();
+            (new SoundPlayer("grunt.wav")).Play();
             LoopThroughDays();
+            (new SoundPlayer("grunt.wav")).Play();
             ReviewGameScores();
             Console.ReadLine();
+            (new SoundPlayer("grunt.wav")).Play();
         }
 
         public void SetWeatherForWeek()
@@ -172,11 +185,13 @@ namespace LemonadeStand
             while (dayCount < totalDays)
             {
                 DisplayForecast();
+                (new SoundPlayer("grunt.wav")).Play();
                 Console.ReadLine();
                 Console.Clear();
                 days[dayCount].GoThroughDay(player1, player2, store);
                 UserInterface.AnnounceEndOfDay(dayCount + 1);
                 UserInterface.DisplayActualWeather(days[dayCount].weather.GetWeather(), days[dayCount].weather.temperature);
+                (new SoundPlayer("grunt.wav")).Play();
                 player1.DisplayCupsSold(days[dayCount].numberOfCustomers);
                 player1.DisplayMoney();
                 player2.DisplayCupsSold(days[dayCount].numberOfCustomers);
@@ -185,6 +200,7 @@ namespace LemonadeStand
                 player2.ResetInventory();
                 UserInterface.DisplayIceMelted();
                 Console.ReadLine();
+                (new SoundPlayer("grunt.wav")).Play();
                 Console.Clear();
                 LogDaysEarnings();
                 AdvanceDay();
