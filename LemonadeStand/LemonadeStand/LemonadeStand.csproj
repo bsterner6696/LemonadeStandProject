@@ -51,8 +51,6 @@
     <Compile Include="FileWriter.cs" />
     <Compile Include="Forecast.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="GoogleWeather.cs" />
-    <Compile Include="GoogleWeatherCondition.cs" />
     <Compile Include="Human.cs" />
     <Compile Include="Ice.cs" />
     <Compile Include="Inventory.cs" />
