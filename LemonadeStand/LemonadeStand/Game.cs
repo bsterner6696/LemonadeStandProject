@@ -194,7 +194,7 @@ namespace LemonadeStand
             UserInterface.AnnounceForecast();
             for (int x = dayCount; x < dayCount + 7; x++)
             {
-                UserInterface.DisplayForecast(days[x + 1].weather.forecast.forecastWeather, days[x + 1].weather.forecast.forecastTemperature, x + 2);
+                UserInterface.DisplayForecast(days[x].weather.forecast.forecastWeather, days[x].weather.forecast.forecastTemperature, x + 1);
             }
         }
 

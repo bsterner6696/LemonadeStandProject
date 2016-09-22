@@ -14,7 +14,7 @@ namespace LemonadeStand
             using (StreamWriter outputFile = new StreamWriter("dayLog.txt", true))
             {
 
-                outputFile.WriteLine(";{0} : {1} : Day {2}", money, name, day);
+                outputFile.WriteLine("{0} Day {1} : ${2}", name, day, money);
             }
         }
 

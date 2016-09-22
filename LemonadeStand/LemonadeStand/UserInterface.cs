@@ -43,7 +43,7 @@ namespace LemonadeStand
 
             }
 
-            Console.WriteLine("The weather for day number {0} will be {1} and {2} degrees.", dayNumber, weatherType, temperature);
+            Console.WriteLine("The forecasted weather for day number {0} is {1} and {2} degrees.", dayNumber, weatherType, temperature);
         }
 
         public static void AnnounceForecast()
