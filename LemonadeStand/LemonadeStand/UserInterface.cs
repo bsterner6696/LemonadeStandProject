@@ -78,7 +78,7 @@ namespace LemonadeStand
         }
         public static void DisplayTodaysForecast(string weather, int temperature)
         {
-            Console.WriteLine("The forecast for today is {0} with a temperature of {1} degrees.)", weather, temperature);
+            Console.WriteLine("The forecast for today is {0} with a temperature of {1} degrees.", weather, temperature);
         }
         public static void RequestLemonadePrice()
         {

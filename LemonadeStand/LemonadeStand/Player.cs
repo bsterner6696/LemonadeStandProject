@@ -13,6 +13,7 @@ namespace LemonadeStand
         public string name;
         public int cupsBefore;
         static public Random random = new Random();
+        FileWriter fileWriter = new FileWriter();
 
         public virtual void SetName()
         {
@@ -235,6 +236,11 @@ namespace LemonadeStand
         {
             stand.inventory.iceCubes.Clear();
             stand.inventory.cupsOfLemonadeLeftInPitcher = 0;
+        }
+
+        public virtual void LogEarnings(int day)
+        {
+            fileWriter.WriteScore(name, string.Format("{0:0.00}", Math.Round(stand.inventory.money, 2)), day);
         }
     }
 }

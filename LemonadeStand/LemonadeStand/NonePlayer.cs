@@ -35,5 +35,10 @@ namespace LemonadeStand
         {
             
         }
+
+        public override void LogEarnings(int day)
+        {
+           
+        }
     }
 }

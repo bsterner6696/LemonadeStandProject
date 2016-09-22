@@ -88,6 +88,7 @@ namespace LemonadeStand
             DetermineNumberOfDays();
             SetGameMode();
             File.WriteAllText("dayLog.txt", String.Empty);
+            Console.Clear();
             player1.SetName();
             player2.SetName();
             GenerateDays();
@@ -201,8 +202,8 @@ namespace LemonadeStand
 
         public void LogDaysEarnings()
         {
-            fileWriter.WriteScore(player1.name, string.Format("{0:0.00}", Math.Round(player1.stand.inventory.money, 2)), dayCount + 1);
-            fileWriter.WriteScore(player2.name, string.Format("{0:0.00}", Math.Round(player2.stand.inventory.money, 2)), dayCount + 1);
+            player1.LogEarnings(dayCount + 1);
+            player2.LogEarnings(dayCount + 2);
         }
 
         public void ReviewGameScores()
