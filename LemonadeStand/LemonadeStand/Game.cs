@@ -175,6 +175,7 @@ namespace LemonadeStand
                 Console.Clear();
                 days[dayCount].GoThroughDay(player1, player2, store);
                 UserInterface.AnnounceEndOfDay(dayCount + 1);
+                UserInterface.DisplayActualWeather(days[dayCount].weather.GetWeather(), days[dayCount].weather.temperature);
                 player1.DisplayCupsSold(days[dayCount].numberOfCustomers);
                 player1.DisplayMoney();
                 player2.DisplayCupsSold(days[dayCount].numberOfCustomers);

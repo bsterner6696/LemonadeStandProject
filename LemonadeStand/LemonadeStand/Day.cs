@@ -78,16 +78,16 @@ namespace LemonadeStand
         {
             
             player1.DisplayMoney();
-            UserInterface.DisplayWeather(weather.GetWeather(), weather.temperature);
+            UserInterface.DisplayTodaysForecast(weather.forecast.GetForecastWeather(), weather.forecast.forecastTemperature);
             player1.SetPriceLemonade();
             Console.Clear();
             player2.DisplayMoney();
-            UserInterface.DisplayWeather(weather.GetWeather(), weather.temperature);
+            UserInterface.DisplayTodaysForecast(weather.forecast.GetForecastWeather(), weather.forecast.forecastTemperature);
             player2.SetPriceLemonade();
             Console.Clear();
             player1.BuyIngredients(store.priceCups, store.priceIce, store.priceLemons, store.priceSugar);
             player1.StoreNumberCups();
-            Console.ReadLine();
+            Console.Clear();
             player2.BuyIngredients(store.priceCups, store.priceIce, store.priceLemons, store.priceSugar);
             player2.StoreNumberCups();
             RunStandForDay(player1);

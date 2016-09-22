@@ -72,9 +72,13 @@ namespace LemonadeStand
         {
             Console.WriteLine("{0}, you have ${1}",name, money);
         }
-        public static void DisplayWeather(string weather, int temperature)
+        public static void DisplayActualWeather(string weather, int temperature)
         {
-            Console.WriteLine("The weather today is {0} with a temperature of {1}", weather, temperature);
+            Console.WriteLine("The weather today was actually {0} with a temperature of {1} degrees.", weather, temperature);
+        }
+        public static void DisplayTodaysForecast(string weather, int temperature)
+        {
+            Console.WriteLine("The forecast for today is {0} with a temperature of {1} degrees.)", weather, temperature);
         }
         public static void RequestLemonadePrice()
         {

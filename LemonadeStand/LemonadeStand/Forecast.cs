@@ -22,6 +22,28 @@ namespace LemonadeStand
                 forecastWeather = random.Next(0, 4);
             }
         }
+        public string GetForecastWeather()
+        {
+
+            switch (forecastWeather)    
+            {
+                case 0:
+                    return "Sunny and Clear";
+
+                case 1:
+                    return "Rainy";
+
+                case 2:
+                    return "Cloudy";
+
+                case 3:
+                    return "Hazy";
+
+                default:
+                    return "Sunny and Clear";
+
+            }
+        }
 
         public void SetForecastTemperature(int temperature)
         {
