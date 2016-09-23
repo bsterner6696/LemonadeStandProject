@@ -8,10 +8,7 @@ namespace LemonadeStand
 {
     public class NonePlayer : Player
     {
-        public NonePlayer()
-        {
-            stand.priceLemonade = 50; 
-        }
+
         public override void SetName()
         {
             

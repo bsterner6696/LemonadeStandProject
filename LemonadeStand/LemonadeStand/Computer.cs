@@ -10,6 +10,10 @@ namespace LemonadeStand
     {
         public int minPrice = 10;
         public int maxPrice = 32;
+        public int cupsToHaveEachDay = 100;
+        public int iceToHaveEachDay = 200;
+        public int lemonsToHaveEachDay = 40;
+        public int sugarToHaveEachDay = 40;
 
         public Computer()
         {
@@ -18,14 +22,14 @@ namespace LemonadeStand
 
         public override void SetPriceLemonade()
         {
-            stand.priceLemonade = random.Next(minPrice, maxPrice);
-            Console.WriteLine("{0} sets its price at {1} cents.", name, stand.priceLemonade);
+            stand.priceLemonade = random.Next(minPrice, maxPrice+1)*.01;
+            Console.WriteLine("{0} sets its price at ${1}", name, string.Format("{0:0.00}", Math.Round(stand.priceLemonade, 2)));
             Console.ReadLine();
         }
 
         public override void ShopForCups(double priceCups)
         {
-            int amount = 100 - stand.inventory.cups.Count();
+            int amount = cupsToHaveEachDay - stand.inventory.cups.Count();
             if (amount > 0)
             {
                 if (amount * priceCups <= stand.inventory.money)
@@ -37,7 +41,7 @@ namespace LemonadeStand
         }
         public override void ShopForIce(double priceIce)
         {
-            int amount = 200 - stand.inventory.iceCubes.Count();
+            int amount = iceToHaveEachDay - stand.inventory.iceCubes.Count();
             if (amount > 0)
             {
                 if (amount * priceIce <= stand.inventory.money)
@@ -50,7 +54,7 @@ namespace LemonadeStand
         }
         public override void ShopForLemons(double priceLemons)
         {
-            int amount = 40 - stand.inventory.lemons.Count();
+            int amount = lemonsToHaveEachDay - stand.inventory.lemons.Count();
             if (amount > 0)
             {
                 if (amount * priceLemons <= stand.inventory.money)
@@ -63,7 +67,7 @@ namespace LemonadeStand
         }
         public override void ShopForSugar(double priceSugar)
         {
-            int amount = 40 - stand.inventory.sugarCups.Count();
+            int amount = sugarToHaveEachDay - stand.inventory.sugarCups.Count();
             if (amount > 0)
             {
                 if (amount * priceSugar <= stand.inventory.money)

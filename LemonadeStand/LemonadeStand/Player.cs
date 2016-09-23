@@ -13,8 +13,10 @@ namespace LemonadeStand
         public Stand stand = new Stand();
         public string name;
         public int cupsBefore;
+        public double moneyBefore;
         static public Random random = new Random();
         FileWriter fileWriter = new FileWriter();
+        SoundPlayer grunt = new SoundPlayer("grunt.wav");
 
         public virtual void SetName()
         {
@@ -60,16 +62,18 @@ namespace LemonadeStand
         public virtual void SetPriceLemonade()
         {
             UserInterface.RequestLemonadePrice();
-            (new SoundPlayer("grunt.wav")).Play();
             string price = Console.ReadLine();
-            int prc;
-            if (Int32.TryParse(price, out prc))
+            double priceDouble;
+            if (double.TryParse(price, out priceDouble))
             {
-                stand.priceLemonade = prc;
+
+                stand.priceLemonade = priceDouble;
 
             }
+
             else
             {
+                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 SetPriceLemonade();
             }
@@ -87,7 +91,6 @@ namespace LemonadeStand
 
         public void TryToBuyCups(double priceCups)
         {
-            (new SoundPlayer("grunt.wav")).Play();
             string amt = Console.ReadLine();
             int amount;
             if (Int32.TryParse(amt, out amount))
@@ -95,6 +98,7 @@ namespace LemonadeStand
             }
             else
             {
+                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 TryToBuyCups(priceCups);
             }
@@ -105,6 +109,8 @@ namespace LemonadeStand
             }
             else
             {
+                grunt.Play();
+                Console.WriteLine("Not Enough Money");
                 TryToBuyCups(priceCups);
             }
         }
@@ -123,7 +129,7 @@ namespace LemonadeStand
 
         public void TryToBuyIce(double priceIce)
         {
-            (new SoundPlayer("grunt.wav")).Play();
+
             string amt = Console.ReadLine();
             int amount;
             if (Int32.TryParse(amt, out amount))
@@ -131,6 +137,7 @@ namespace LemonadeStand
             }
             else
             {
+                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 TryToBuyIce(priceIce);
             }
@@ -141,6 +148,8 @@ namespace LemonadeStand
             }
             else
             {
+                grunt.Play();
+                Console.WriteLine("Not enough Money");
                 TryToBuyIce(priceIce);
             }
         }
@@ -158,7 +167,6 @@ namespace LemonadeStand
 
         public void TryToBuyLemons(double priceLemons)
         {
-            (new SoundPlayer("grunt.wav")).Play();
             string amt = Console.ReadLine();
             int amount;
             if (Int32.TryParse(amt, out amount))
@@ -166,6 +174,7 @@ namespace LemonadeStand
             }
             else
             {
+                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 TryToBuyLemons(priceLemons);
             }
@@ -176,6 +185,8 @@ namespace LemonadeStand
             }
             else
             {
+                grunt.Play();
+                Console.WriteLine("Not enough Money");
                 TryToBuyLemons(priceLemons);
             }
         }
@@ -191,7 +202,7 @@ namespace LemonadeStand
 
         public void TryToBuySugar(double sugarPrice)
         {
-            (new SoundPlayer("grunt.wav")).Play();
+
             string amt = Console.ReadLine();
             int amount;
             if (Int32.TryParse(amt, out amount))
@@ -199,6 +210,7 @@ namespace LemonadeStand
             }
             else
             {
+                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 TryToBuySugar(sugarPrice);
             }
@@ -209,6 +221,8 @@ namespace LemonadeStand
             }
             else
             {
+                grunt.Play();
+                Console.WriteLine("Not enough Money");
                 TryToBuySugar(sugarPrice);
             }
         }
@@ -251,6 +265,15 @@ namespace LemonadeStand
         public virtual void LogEarnings(int day)
         {
             fileWriter.WriteScore(name, string.Format("{0:0.00}", Math.Round(stand.inventory.money, 2)), day);
+        }
+
+        public void SaveMoneyBeforeDay()
+        {
+            moneyBefore = stand.inventory.money;
+        }
+        public void DisplayMoneyBeforeDay()
+        {
+            Console.WriteLine("At the beginning of the day you had ${0}.", string.Format("{0:0.00}", Math.Round(moneyBefore, 2)));
         }
     }
 }

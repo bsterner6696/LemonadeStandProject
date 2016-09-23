@@ -9,20 +9,21 @@ namespace LemonadeStand
     public class Stand
     {
         public Inventory inventory = new Inventory();
-        public int priceLemonade;
+        public double priceLemonade;
         public Recipe recipe = new Recipe();
+        public int CupsSoldPerTransaction = 1;
+        
 
         public void SellLemonade()
         {
-            inventory.cupsOfLemonadeLeftInPitcher -= 1;
+            inventory.cupsOfLemonadeLeftInPitcher -= CupsSoldPerTransaction;
             inventory.cups.RemoveAt(0);
-            double aPenny = .01;
-            inventory.money += priceLemonade * aPenny;
+            inventory.money += priceLemonade;
         }
 
         public void MakeLemonade()
         {
-            inventory.cupsOfLemonadeLeftInPitcher = 10;
+            inventory.cupsOfLemonadeLeftInPitcher = inventory.maxPitcherCapacity;
             for (int x = 0; x < recipe.requiredLemons; x++)
             {
                 inventory.lemons.RemoveAt(0);

@@ -16,14 +16,5 @@ namespace LemonadeStand
             return data;
         }
 
-        public string[] SortScores(string unsplitText)
-        {
-            string data = unsplitText;
-            string[] splitScores;
-            splitScores = data.Split(';');
-            Array.Sort(splitScores);
-            Array.Reverse(splitScores);
-            return splitScores;
-        }
     }
 }

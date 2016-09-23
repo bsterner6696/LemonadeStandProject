@@ -10,12 +10,6 @@ namespace LemonadeStand
     {
         
 
-        public static void PromptForName(string name)
-        {
-            Console.WriteLine("Please enter name for {0}.", name);
-        }
-
-        
         public static void DisplayForecast(int type, int temperature, int dayNumber)
         {
             string weatherType;
@@ -82,7 +76,7 @@ namespace LemonadeStand
         }
         public static void RequestLemonadePrice()
         {
-            Console.WriteLine("How many cents would you like to charge for a glass of lemonade?");
+            Console.WriteLine("How much would you like to charge for a glass of lemonade?");
         }
 
         public static void AnnounceEndOfDay(int dayNumber)
@@ -99,14 +93,14 @@ namespace LemonadeStand
             Console.WriteLine("Your ice has melted!");
         }
 
-        public static void DisplayWelcomeMessage()
+        public static void DisplayWelcomeMessage(int pitcherCapacity, int requiredLemons, int requiredSugar, int requiredIce, int maxPriceWillingToPay)
         {
             Console.WriteLine("Welcome to Lemonade Stand!");
             Console.WriteLine("In this game you will buy ingredients to make lemonade, and run a stand to sell it.");
             Console.WriteLine("The weather on a particular day will determine how much a customer will pay for lemonade.");
-            Console.WriteLine("Even in the best case scenario, a customer will never pay more than 40 cents for a cup.");
-            Console.WriteLine("A pitcher holds 10 cups of lemonade.");
-            Console.WriteLine("A pitcher of lemonade requires 4 lemons, 4 cups of sugar, and 20 ice cubes to make.");
+            Console.WriteLine("Even in the best case scenario, a customer will never pay more than {0} cents for a cup.", maxPriceWillingToPay);
+            Console.WriteLine("A pitcher holds {0} cups of lemonade.", pitcherCapacity);
+            Console.WriteLine("A pitcher of lemonade requires {0} lemons, {1} cups of sugar, and {2} ice cubes to make.", requiredLemons, requiredSugar, requiredIce);
             Console.WriteLine("Good luck!");
         }
 
@@ -122,10 +116,10 @@ namespace LemonadeStand
             Console.WriteLine("Enter '2' to play with 2 players.");
         }
 
-        public static void PromptTotalDays()
+        public static void PromptTotalDays(int minNumberDays, int maxNumberDays)
         {
             Console.WriteLine("Please enter the desired number of in game days to play.");
-            Console.WriteLine("Enter a number between 7 and 28.");
+            Console.WriteLine("Enter a number between {0} and {1}.", minNumberDays, maxNumberDays);
         }
     }
 }

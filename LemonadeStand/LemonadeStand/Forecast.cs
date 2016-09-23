@@ -11,10 +11,11 @@ namespace LemonadeStand
         public int forecastWeather;
         public int forecastTemperature;
         static Random random = new Random();
+        public int forecastReliabilityFactor = 5;
         
         public void SetForecastWeather(int type)
         {
-            if (GetForecastReliability() != 5)
+            if (GetForecastReliability() != forecastReliabilityFactor)
             {
                 forecastWeather = type;
             } else
@@ -45,20 +46,20 @@ namespace LemonadeStand
             }
         }
 
-        public void SetForecastTemperature(int temperature)
+        public void SetForecastTemperature(int temperature, int maxTemperature, int minTemperature)
         {
-            if (GetForecastReliability() != 5)
+            if (GetForecastReliability() != forecastReliabilityFactor)
             {
                 forecastTemperature = temperature;
             } else
             {
-                forecastTemperature = random.Next(60, 101);
+                forecastTemperature = random.Next(minTemperature, maxTemperature+1);
             }
         }
 
         public int GetForecastReliability()
         {
-            return random.Next(0, 6);
+            return random.Next(0, forecastReliabilityFactor+1);
         }
 
     }

@@ -45,7 +45,7 @@ namespace LemonadeStand
         }
         public void SetTemperature()
         {
-            temperature = random.Next(minTemperature, maxTemperature);
+            temperature = random.Next(minTemperature, maxTemperature+1);
         }
         
     }

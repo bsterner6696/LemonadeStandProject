@@ -17,9 +17,10 @@ namespace LemonadeStand
         public int numberOfCustomers;
         public int maxNumberOfCustomers = 120;
         public int minNumberOfCustomers = 70;
+        public int defaultNumberOfCustomers = 70;
         public Day()
         {
-            numberOfCustomers = 70;
+            numberOfCustomers = defaultNumberOfCustomers;
         }
         
         public void GetNumberOfCustomers()
@@ -54,7 +55,7 @@ namespace LemonadeStand
         {
             for (int x = 0; x < numberOfCustomers; x++)
             {
-                customers[x].SetTemperatureModifier(weather.temperature);
+                customers[x].SetTemperatureModifier(weather.temperature, weather.minTemperature, weather.maxTemperature);
             }
         }
 
@@ -81,22 +82,19 @@ namespace LemonadeStand
             
             player1.DisplayMoney();
             UserInterface.DisplayTodaysForecast(weather.forecast.GetForecastWeather(), weather.forecast.forecastTemperature);
-            (new SoundPlayer("grunt.wav")).Play();
             player1.SetPriceLemonade();
-            (new SoundPlayer("grunt.wav")).Play();
             Console.Clear();
             player2.DisplayMoney();
             UserInterface.DisplayTodaysForecast(weather.forecast.GetForecastWeather(), weather.forecast.forecastTemperature);
             player2.SetPriceLemonade();
-            (new SoundPlayer("grunt.wav")).Play();
             Console.Clear();
             player1.BuyIngredients(store.priceCups, store.priceIce, store.priceLemons, store.priceSugar);
-            (new SoundPlayer("grunt.wav")).Play();
             player1.StoreNumberCups();
             Console.Clear();
             player2.BuyIngredients(store.priceCups, store.priceIce, store.priceLemons, store.priceSugar);
-            (new SoundPlayer("grunt.wav")).Play();
             player2.StoreNumberCups();
+            player1.SaveMoneyBeforeDay();
+            player2.SaveMoneyBeforeDay();
             RunStandForDay(player1);
             RunStandForDay(player2);
             
@@ -106,7 +104,7 @@ namespace LemonadeStand
         {
             foreach (Customer customer in customers)
             {
-                if (customer.actualPriceWillingToPay >= player.stand.priceLemonade && player.stand.inventory.cups.Count() > 0)
+                if (customer.actualPriceWillingToPay >= player.stand.priceLemonade*100 && player.stand.inventory.cups.Count() > 0)
                 {
                     if (player.stand.inventory.cupsOfLemonadeLeftInPitcher > 0)
                     {

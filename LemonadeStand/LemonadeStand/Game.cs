@@ -19,8 +19,13 @@ namespace LemonadeStand
         Forecast forecast = new Forecast();
         Store store = new Store();
         int dayCount;
+        int maxNumberDays = 28;
+        int minNumberDays = 7;
         FileReader fileReader = new FileReader();
         FileWriter fileWriter = new FileWriter();
+        SoundPlayer grunt = new SoundPlayer("grunt.wav");
+        Art art = new Art();
+        int numberOfDaysInForecast = 7;
 
         
         public Game()
@@ -30,7 +35,7 @@ namespace LemonadeStand
 
         public void GenerateDays()
         {
-            for (int x = 0; x < 40; x++)
+            for (int x = 0; x < (maxNumberDays+numberOfDaysInForecast); x++)
             {
                 days[x] = new Day();
             }
@@ -39,7 +44,7 @@ namespace LemonadeStand
         public void SetGameMode()
         {
             UserInterface.ListGameModeOptions();
-            (new SoundPlayer("grunt.wav")).Play();
+            
             string choice = Console.ReadLine();
             switch (choice)
             {
@@ -57,6 +62,7 @@ namespace LemonadeStand
                     break;
                 default:
                     Console.WriteLine("Enter valid option");
+                    grunt.Play();
                     SetGameMode();
                     break;
             }
@@ -67,8 +73,8 @@ namespace LemonadeStand
 
         public void DetermineNumberOfDays()
         {
-            UserInterface.PromptTotalDays();
-            (new SoundPlayer("grunt.wav")).Play();
+            UserInterface.PromptTotalDays(minNumberDays, maxNumberDays);
+            
             string amt = Console.ReadLine();
             int amount;
             if (Int32.TryParse(amt, out amount))
@@ -76,49 +82,46 @@ namespace LemonadeStand
             }
             else
             {
+                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 DetermineNumberOfDays();
             }
-            if (amount <= 28 && amount >= 7)
+            if (amount <= maxNumberDays && amount >= minNumberDays)
             {
                 totalDays = amount;
             } else
             {
+                grunt.Play();
                 DetermineNumberOfDays();
             }
         }
 
         public void Initialize()
         {
+            art.DrawTitleScreen();
+            Console.ReadLine();
+            Console.Clear();
             DetermineNumberOfDays();
-            (new SoundPlayer("grunt.wav")).Play();
             SetGameMode();
-            (new SoundPlayer("grunt.wav")).Play();
             File.WriteAllText("dayLog.txt", String.Empty);
             Console.Clear();
             player1.SetName();
-            (new SoundPlayer("grunt.wav")).Play();
             player2.SetName();
-            (new SoundPlayer("grunt.wav")).Play();
             GenerateDays();
             GenerateWeather();
             GenerateCustomersForWeek();
             Console.Clear();
-            UserInterface.DisplayWelcomeMessage();
-            (new SoundPlayer("grunt.wav")).Play();
+            UserInterface.DisplayWelcomeMessage(player1.stand.inventory.maxPitcherCapacity, player1.stand.recipe.requiredLemons, player1.stand.recipe.requiredCupsOfSugar, player1.stand.recipe.requiredIceCubes, days[0].customers[0].GetMaxPriceWillingToPay());
             Console.ReadLine();
             Console.Clear();
-            (new SoundPlayer("grunt.wav")).Play();
             LoopThroughDays();
-            (new SoundPlayer("grunt.wav")).Play();
             ReviewGameScores();
             Console.ReadLine();
-            (new SoundPlayer("grunt.wav")).Play();
         }
 
         public void SetWeatherForWeek()
         {
-            for (int x = 0; x < 40; x++)
+            for (int x = 0; x < maxNumberDays + numberOfDaysInForecast; x++)
             {
                 days[x].weather.SetWeatherType();
             }
@@ -126,7 +129,7 @@ namespace LemonadeStand
 
         public void SetWeatherForecastForWeek()
         {
-            for (int x = 0; x < 40; x++)
+            for (int x = 0; x < maxNumberDays + numberOfDaysInForecast; x++)
             {
                 days[x].weather.forecast.SetForecastWeather(days[x].weather.weatherType);
             }
@@ -134,14 +137,14 @@ namespace LemonadeStand
 
         public void SetTemperatureForecastForWeek()
         {
-            for (int x = 0; x < 40; x++)
+            for (int x = 0; x < maxNumberDays + numberOfDaysInForecast; x++)
             {
-                days[x].weather.forecast.SetForecastTemperature(days[x].weather.temperature);
+                days[x].weather.forecast.SetForecastTemperature(days[x].weather.temperature, days[x].weather.maxTemperature, days[x].weather.minTemperature);
             }
         }
         public void SetTemperatureForWeek()
         {
-            for (int x = 0; x < 40; x++)
+            for (int x = 0; x < maxNumberDays + numberOfDaysInForecast; x++)
             {
                days[x].weather.SetTemperature();
             }
@@ -156,25 +159,13 @@ namespace LemonadeStand
         }
         public void GenerateCustomersForWeek()
         {
-            for (int x = 0; x < 40; x++)
+            for (int x = 0; x < maxNumberDays + numberOfDaysInForecast; x++)
             {
                 days[x].GenerateCustomers();
             }
         }
         
         
-
-        public int DetermineCheaperPrice()
-        {
-            if (player1.stand.priceLemonade <= player2.stand.priceLemonade)
-            {
-                return 0;
-            }else
-            {
-                return 1;
-            }
-        }
-
         public void AdvanceDay()
         {
             dayCount += 1;
@@ -185,22 +176,21 @@ namespace LemonadeStand
             while (dayCount < totalDays)
             {
                 DisplayForecast();
-                (new SoundPlayer("grunt.wav")).Play();
                 Console.ReadLine();
                 Console.Clear();
                 days[dayCount].GoThroughDay(player1, player2, store);
                 UserInterface.AnnounceEndOfDay(dayCount + 1);
                 UserInterface.DisplayActualWeather(days[dayCount].weather.GetWeather(), days[dayCount].weather.temperature);
-                (new SoundPlayer("grunt.wav")).Play();
                 player1.DisplayCupsSold(days[dayCount].numberOfCustomers);
+                player1.DisplayMoneyBeforeDay();
                 player1.DisplayMoney();
                 player2.DisplayCupsSold(days[dayCount].numberOfCustomers);
+                player2.DisplayMoneyBeforeDay();
                 player2.DisplayMoney();
                 player1.ResetInventory();
                 player2.ResetInventory();
                 UserInterface.DisplayIceMelted();
                 Console.ReadLine();
-                (new SoundPlayer("grunt.wav")).Play();
                 Console.Clear();
                 LogDaysEarnings();
                 AdvanceDay();
@@ -210,7 +200,7 @@ namespace LemonadeStand
         public void DisplayForecast()
         {
             UserInterface.AnnounceForecast();
-            for (int x = dayCount; x < dayCount + 7; x++)
+            for (int x = dayCount; x < dayCount + numberOfDaysInForecast; x++)
             {
                 UserInterface.DisplayForecast(days[x].weather.forecast.forecastWeather, days[x].weather.forecast.forecastTemperature, x + 1);
             }
@@ -219,7 +209,7 @@ namespace LemonadeStand
         public void LogDaysEarnings()
         {
             player1.LogEarnings(dayCount + 1);
-            player2.LogEarnings(dayCount + 2);
+            player2.LogEarnings(dayCount + 1);
         }
 
         public void ReviewGameScores()
