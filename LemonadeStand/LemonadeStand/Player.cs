@@ -16,7 +16,7 @@ namespace LemonadeStand
         public double moneyBefore;
         static public Random random = new Random();
         FileWriter fileWriter = new FileWriter();
-        SoundPlayer grunt = new SoundPlayer("grunt.wav");
+        Art art = new Art();
 
         public virtual void SetName()
         {
@@ -73,14 +73,13 @@ namespace LemonadeStand
 
             else
             {
-                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 SetPriceLemonade();
             }
         }
         public virtual void ShopForCups(double priceCups)
         {
-
+                art.DrawCupArt();
                 UserInterface.DisplayInventory(stand.inventory.cups.Count(), "cups", name);
                 UserInterface.PromptToBuy("cups");
                 UserInterface.DisplayPricePer(priceCups);
@@ -98,7 +97,6 @@ namespace LemonadeStand
             }
             else
             {
-                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 TryToBuyCups(priceCups);
             }
@@ -109,7 +107,6 @@ namespace LemonadeStand
             }
             else
             {
-                grunt.Play();
                 Console.WriteLine("Not Enough Money");
                 TryToBuyCups(priceCups);
             }
@@ -117,14 +114,12 @@ namespace LemonadeStand
 
         public virtual void ShopForIce(double priceIce)
         {
-
+                art.DrawIceArt();
                 UserInterface.DisplayInventory(stand.inventory.iceCubes.Count(), "ice cubes", name);
                 UserInterface.PromptToBuy("ice cubes");
                 UserInterface.DisplayPricePer(priceIce);
                 DisplayMoney();
                 TryToBuyIce(priceIce);
-
-
         }
 
         public void TryToBuyIce(double priceIce)
@@ -137,7 +132,6 @@ namespace LemonadeStand
             }
             else
             {
-                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 TryToBuyIce(priceIce);
             }
@@ -148,7 +142,6 @@ namespace LemonadeStand
             }
             else
             {
-                grunt.Play();
                 Console.WriteLine("Not enough Money");
                 TryToBuyIce(priceIce);
             }
@@ -157,6 +150,7 @@ namespace LemonadeStand
         public virtual void ShopForLemons(double priceLemons)
         {
 
+                art.DrawLemonArt();
                 UserInterface.DisplayInventory(stand.inventory.lemons.Count(), "lemons", name);
                 UserInterface.PromptToBuy("lemons");
                 UserInterface.DisplayPricePer(priceLemons);
@@ -174,7 +168,6 @@ namespace LemonadeStand
             }
             else
             {
-                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 TryToBuyLemons(priceLemons);
             }
@@ -185,13 +178,13 @@ namespace LemonadeStand
             }
             else
             {
-                grunt.Play();
                 Console.WriteLine("Not enough Money");
                 TryToBuyLemons(priceLemons);
             }
         }
         public virtual void ShopForSugar(double priceSugar)
         {
+                art.DrawSugarArt();
                 UserInterface.DisplayInventory(stand.inventory.sugarCups.Count(), "cups of sugar", name);
                 UserInterface.PromptToBuy("cups of sugar");
                 UserInterface.DisplayPricePer(priceSugar);
@@ -210,7 +203,6 @@ namespace LemonadeStand
             }
             else
             {
-                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 TryToBuySugar(sugarPrice);
             }
@@ -221,7 +213,6 @@ namespace LemonadeStand
             }
             else
             {
-                grunt.Play();
                 Console.WriteLine("Not enough Money");
                 TryToBuySugar(sugarPrice);
             }

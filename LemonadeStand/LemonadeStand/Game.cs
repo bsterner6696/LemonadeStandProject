@@ -23,7 +23,7 @@ namespace LemonadeStand
         int minNumberDays = 7;
         FileReader fileReader = new FileReader();
         FileWriter fileWriter = new FileWriter();
-        SoundPlayer grunt = new SoundPlayer("grunt.wav");
+        SoundPlayer bGMusic = new SoundPlayer("lemonadeSong.wav");
         Art art = new Art();
         int numberOfDaysInForecast = 7;
 
@@ -62,7 +62,6 @@ namespace LemonadeStand
                     break;
                 default:
                     Console.WriteLine("Enter valid option");
-                    grunt.Play();
                     SetGameMode();
                     break;
             }
@@ -82,7 +81,6 @@ namespace LemonadeStand
             }
             else
             {
-                grunt.Play();
                 Console.WriteLine("Enter a valid number.");
                 DetermineNumberOfDays();
             }
@@ -91,7 +89,6 @@ namespace LemonadeStand
                 totalDays = amount;
             } else
             {
-                grunt.Play();
                 DetermineNumberOfDays();
             }
         }
@@ -99,6 +96,7 @@ namespace LemonadeStand
         public void Initialize()
         {
             art.DrawTitleScreen();
+            bGMusic.PlayLooping();
             Console.ReadLine();
             Console.Clear();
             DetermineNumberOfDays();
