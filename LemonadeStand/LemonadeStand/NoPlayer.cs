@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    public class NonePlayer : Player
+    public class NoPlayer : Player
     {
 
         public override void SetName()

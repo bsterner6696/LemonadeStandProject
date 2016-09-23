@@ -50,7 +50,7 @@ namespace LemonadeStand
             {
                 case "alone":
                     player1 = new Human("player 1");
-                    player2 = new NonePlayer();
+                    player2 = new NoPlayer();
                     break;
                 case "computer":
                     player1 = new Human("player 1");

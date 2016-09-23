@@ -56,7 +56,7 @@
     <Compile Include="Ice.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Lemon.cs" />
-    <Compile Include="NonePlayer.cs" />
+    <Compile Include="NoPlayer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

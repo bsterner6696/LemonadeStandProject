@@ -11,10 +11,9 @@ namespace LemonadeStand
     {
         public string ReadFile(string file)
         {
-            StreamReader t = new StreamReader(file);
-            string data = t.ReadToEnd();
+            StreamReader fileToRead = new StreamReader(file);
+            string data = fileToRead.ReadToEnd();
             return data;
         }
-
     }
 }
